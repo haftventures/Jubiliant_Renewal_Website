@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="/assets/googlefonts.css"/>
+  <script src="/assets/js/tailwind.js"></script>
+  <script src="/assets/js/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body class="font-[Inter] min-h-screen flex flex-col items-center justify-center text-gray-800 bg-gradient-to-br from-[#ea690b] via-[#CC5500]">
+
+
+<div class="block md:hidden absolute top-4 left-0 px-4">
+  <div id="mobileMenuBtn" class="flex items-center justify-center bg-gray-100 shadow-xl rounded-[50%] p-2 w-[40px] h-[40px] mx-auto">   
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" role="img">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </div> 
+</div>
+
+
+<!-- Links at Top -->
+<div class="hidden md:fixed md:top-4 md:right-4 md:flex md:flex-wrap gap-4 text-sm sm:gap-6 sm:pr-8 z-50">
+    <a href="/termsandconditions.html" target="_blank" class="text-[17px] text-white hover:text-yellow-300 hover:underline">
+    Terms & Conditions
+  </a>
+  <a href="/privacypolicy.html" target="_blank" class="text-[17px] text-white hover:text-yellow-300 hover:underline">
+    Privacy Policy
+  </a>
+  <a href="/cancellationandrefund.html" target="_blank" class="text-[17px] text-white hover:text-yellow-300 hover:underline">
+    Return & Refund
+  </a>
+  <a href="/aboutus.html" target="_blank" class="text-[17px] text-white hover:text-yellow-300 hover:underline">
+    About us
+  </a>
+  <a href="/contactus.html" target="_blank" class="text-[17px] text-white hover:text-yellow-300 hover:underline">
+    Contact us
+  </a>
+</div>
+
+    <div id="mobileSidebar" class="no-print fixed inset-0 z-40 hidden">
+      <div class="absolute inset-0 bg-black opacity-30" id="mobileSidebarOverlay"></div>
+      <div class="absolute left-0 top-0 h-full w-72 bg-white p-4 shadow-lg">
+        <div class="flex items-center justify-between mb-4">
+          <div class="font-semibold">Menu</div>
+          <button id="mobileCloseBtn" class="px-2 py-1 rounded hover:bg-gray-100">✕</button>
+        </div>
+        <nav class="space-y-2 list-none">
+
+  <li>
+    <a href="/termsandconditions.html" target="_blank" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-gray-100">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M8 16h8M8 12h8m-6-8h6l4 4v10a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h4z" />
+      </svg>
+      Terms & Conditions
+    </a>
+  </li>
+
+  <li>
+    <a href="/privacypolicy.html" target="_blank" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-gray-100">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 11c0-1.657-1.343-3-3-3S6 9.343 6 11s1.343 3 3 3 3-1.343 3-3z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 11V5a2 2 0 012-2h4a2 2 0 012 2v6a8 8 0 11-16 0v-1" />
+      </svg>
+      Privacy Policy
+    </a>
+  </li>
+
+  <li>
+    <a href="/cancellationandrefund.html" target="_blank" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-gray-100">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M4 4v6h6M20 20v-6h-6M20 4l-6 6M4 20l6-6" />
+      </svg>
+      Return & Refund
+    </a>
+  </li>
+
+  <li>
+    <a href="/aboutus.html" target="_blank" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-gray-100">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 14c4.418 0 8 1.79 8 4v2H4v-2c0-2.21 3.582-4 8-4z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 12a4 4 0 100-8 4 4 0 000 8z" />
+      </svg>
+      About us
+    </a>
+  </li>
+
+  <li>
+    <a href="/contactus.html" target="_blank" class="flex  items-center gap-3 px-3 py-2 rounded hover:bg-gray-100">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M16 12h2a2 2 0 012 2v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5a2 2 0 012-2h2" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 12a4 4 0 100-8 4 4 0 000 8z" />
+      </svg>
+      Contact us
+    </a>
+  </li>
+
+</nav>
+
+      </div>
+    </div>
+
+
+  <!-- Center Screen Section -->
+  <section class="flex items-center justify-center w-full min-h-screen pt-10">
+
+    <div class="w-full max-w-md bg-white/95 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_rgba(0,0,0,0.3)]">
+
+      <!-- Header -->
+     <div class="text-center mb-6">
+  <img 
+    src="https://cdn-icons-png.flaticon.com/512/3209/3209265.png" 
+    class="mx-auto w-20 h-20 mb-3 drop-shadow-lg" 
+    alt="Insurance Shield Logo"
+  />
+
+  <h1 class="text-2xl font-semibold text-gray-800">Secure Your Journey</h1>
+  <p class="text-gray-500 text-sm mt-1">Login to access your motor insurance dashboard</p>
+</div>
+
+
+      <!-- Login Form -->
+      <form id="loginForm" method="POST" class="space-y-4">
+        <h1 class="text-2xl font-semibold text-center mb-4">Let’s Go</h1>
+
+        <!-- Username -->
+        <div>
+          <label for="txt_name" class="block mb-1 font-medium">Enter Your Name</label>
+          <input 
+            type="text"
+            id="txt_name"
+            name="Name"
+            autocomplete="off"
+            maxlength="60"
+            placeholder="User Name"
+            required
+            class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-600 focus:ring-2 focus:ring-blue-300 focus:outline-none transition" />
+          <p id="name_error" class="text-red-600 text-sm mt-1 hidden"></p>
+        </div>
+
+        <!-- Password -->
+    <div class="relative">
+  <label for="txt_Password" class="block mb-1 font-medium">Enter Your Password</label>
+
+  <input 
+    type="password"
+    id="txt_Password"
+    name="Password"
+    autocomplete="off"
+    maxlength="60"
+    placeholder="Password"
+    required
+    class="w-full p-3 pr-12 border border-gray-300 rounded-lg focus:border-blue-600 focus:ring-2 focus:ring-blue-300 focus:outline-none transition" />
+
+  <!-- 👁️ SVG Eye Icon -->
+  <span id="togglePassword" class="absolute right-3 top-[42px] cursor-pointer">
+      <!-- eye (default) -->
+      <svg id="eye_open" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600"
+           fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        <circle cx="12" cy="12" r="3" stroke-width="1.5" />
+      </svg>
+
+      <!-- eye-off (hidden initially) -->
+      <svg id="eye_close" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600 hidden"
+           fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M3 3l18 18M10.584 10.587A2 2 0 0113.41 13.41M6.165 6.164C4.508 7.385 3.218 9.04 2.46 12c1.273 4.057 5.063 7 9.54 7 1.79 0 3.476-.43 4.94-1.19M17.834 17.835C19.49 16.614 20.78 14.959 21.54 12c-.878-2.8-2.83-5.018-5.25-6.14" />
+      </svg>
+  </span>
+
+  <p id="password_error" class="text-red-600 text-sm mt-1 hidden"></p>
+</div>
+
+
+
+        <!-- Error Message -->
+        <p id="error" class="text-red-600 text-sm text-center"></p>
+
+        <!-- Button -->
+       <button 
+  type="submit" 
+  id="button_login"
+  class="w-full py-3 text-white text-lg font-semibold rounded-lg 
+         bg-gradient-to-r from-[#ea690b] to-[#CC5500] 
+         hover:from-[#CC5500] hover:to-[#ea690b]
+         hover:-translate-y-0.5 shadow-md hover:shadow-lg 
+         transition-all duration-300">
+  Login
+</button>
+
+
+      </form>
+    </div>
+  </section>
+
+
+
+ <!--Popup modal-->
+ <div style="z-index: 100000;" id="hs-modal" class="hs-overlay hidden fixed inset-0 z-50 bg-black bg-opacity-70 backdrop-blur-[12px] flex items-center justify-center" role="dialog" aria-modal="true">
+  <div class="bg-white rounded-xl w-full max-w-md p-6 shadow-lg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" >
+    <!-- Header -->
+    <div class="mb-4">
+      <h3 id="modalHeader" class="text-xl text-green-500 font-bold border-b border-gray-200 text-gray-800"></h3>
+     
+      
+    </div>
+    <!-- Message -->
+    <div class="mb-4">
+      <p id="modalMessage" class="text-gray-700 text-lg"></p>
+    </div>
+    <!-- OK Button -->
+    <div class="text-right">
+      <button type="button" id="modalClose" class="py-2 px-4 text-sm font-medium rounded bg-green-600 text-white hover:bg-green-700">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+  <!-- Script -->
+  <script src="/assets/js/common_scripts.js"></script>
+  <script>
+    $("#loginForm").on("submit", async function (e) {
+      e.preventDefault();
+
+      const Name = $("#txt_name").val().trim();
+      const Password = $("#txt_Password").val().trim();
+
+      if (!Name || !Password) {
+        $("#error").text("Please enter username and password.");
+        return;
+      }
+
+      try {
+        const response = await fetch("/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ Name, Password })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          window.location.href = result.redirect;
+        } else if (result.success == false) {
+           showmobilenumber("Error!", "Please Check your username and password.");
+        }
+      } catch (err) {
+        console.error(err);
+        $("#error").text("Network error. Try again.");
+      }
+    });
+
+    const passwordInput = document.getElementById("txt_Password");
+const toggle = document.getElementById("togglePassword");
+const eyeOpen = document.getElementById("eye_open");
+const eyeClose = document.getElementById("eye_close");
+
+toggle.addEventListener("click", () => {
+  const isPassword = passwordInput.type == "password";
+  passwordInput.type = isPassword ? "text" : "password";
+
+  eyeOpen.classList.toggle("hidden");
+  eyeClose.classList.toggle("hidden");
+});
+
+
+ // Mobile menu toggle
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileSidebar = document.getElementById('mobileSidebar');
+    const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+    const mobileOverlay = document.getElementById('mobileSidebarOverlay');
+
+    function openMobileMenu() { mobileSidebar.classList.remove('hidden'); }
+    function closeMobileMenu() { mobileSidebar.classList.add('hidden'); }
+
+    if (mobileBtn) mobileBtn.addEventListener('click', openMobileMenu);
+    if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMobileMenu);
+    if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
+    
+</script>
+</body>
+</html>

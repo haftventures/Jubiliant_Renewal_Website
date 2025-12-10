@@ -1,0 +1,30 @@
+/* ./public/css/input.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.force-compile {
+    /* Use a utility class here */
+    @apply hidden; 
+}
+
+@layer components {
+  .primary_1 {
+    @apply bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-md
+           transition duration-200 active:scale-95 font-semibold px-6 py-2;
+  }
+
+  .card {
+    @apply w-[58%] bg-black shadow-2xl p-2 mt-2 rounded-2xl transition duration-300;
+  }
+
+  .input-box {
+    @apply border border-gray-300 bg-gray-50 rounded-lg px-3 py-1 text-gray-700 w-full
+           focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 cursor-pointer;
+  }
+
+  .label-text {
+    @apply font-semibold text-sm text-gray-800;
+  }
+}

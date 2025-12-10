@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Successful</title>
+     <script src="/assets/js/tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ 
+ <style>
+  @layer utilities {
+    @keyframes wave {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .wave-text:hover span {
+      animation: wave 0.6s ease-in-out infinite;
+      display: inline-block;
+    }
+  }
+</style>
+
+  </head>
+<body id="body" class="bg-gray-100 ">
+
+
+<div class="flex justify-end p-4 fixed right-0 hover:underline underline-offset-8" id="supportbtn">
+ <a class="flex items-center justify-center w-full space-x-2"><i class="fa-solid fa-headset"></i><span>Support</span></a>
+  </div>
+    
+
+ <div class="min-h-screen flex items-center justify-center px-4">
+  <div class="bg-[#fcfcfc] rounded-2xl shadow-lg p-8 w-full max-w-md text-center">
+    <div class="flex justify-center mb-6">
+      <!-- <svg class="w-16 h-16 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg> -->
+      <i id="icon" class="fa-regular fa-circle-check text-6xl text-green-600"></i>
+      <img id="errorimg" src="/assets/images/failergif.gif" alt="Success Icon" class="w-26 h-20 hidden"/> 
+    </div>
+    <h1 id="header" class="text-2xl font-semibold text-gray-800 mb-2">Payment Successful!</h1>
+    <p id="message" class="text-gray-600 mb-1">Your transaction was completed successfully.</p>
+     <a id="kyc_link" href="/kyc.html" class="text-blue-600 underline underline-offset-8 text-sm cursor-pointer">please click the link yours Kyc registeration</a>
+    <!-- <a href="/" class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-6 rounded-full transition-all">
+      Go Back Home
+    </a> -->
+  </div>
+ </div>
+
+   <!-- Modal Background -->
+   <div id="support_Modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+
+  <!-- Modal Box -->
+  <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-6">
+    
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-4">
+       <!-- <div class="flex items-center gap-2">
+      <i class="fa-solid fa-headset text-xl"></i>
+        <span class="text-gray-800 font-semibold text-sm">Support</span>
+       </div> -->
+       <div class="flex items-center gap-2">
+       <i class="fa-solid fa-pen"></i>
+       <span class="text-center text-transform-capitalize text-[20px] text-black font-bold">Rise Your Queries</span>
+       </div>
+       
+      <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+    </div>
+
+    <!-- Form -->
+    <div class="space-y-4">
+
+      <!-- Name -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Header</label>
+        <input id="su_name" type="text" maxlength="50" class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none" placeholder="Enter Header">
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Description</label>
+        <textarea id="su_description" maxlength="1000" class="w-full px-3 py-2 border rounded-lg h-28 resize-none focus:ring focus:ring-blue-300 outline-none" placeholder="Enter description"></textarea>
+      </div>
+
+    </div>
+
+    <!-- Footer Buttons -->
+    <div class="mt-6 flex justify-end gap-3">
+      <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Cancel</button>
+      <button id="save_btn" onclick="Succcess_support()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Submit</button>
+    </div>
+
+  </div>
+   </div>
+
+ <!--Popup modal-->
+ <div style="z-index: 100000;" id="hs-modal" class="hs-overlay hidden fixed inset-0 z-50 bg-black bg-opacity-70 backdrop-blur-[12px] flex items-center justify-center" role="dialog" aria-modal="true">
+  <div class="bg-white rounded-xl w-full max-w-md p-6 shadow-lg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" >
+    <!-- Header -->
+    <div class="mb-4">
+      <h3 id="modalHeader" class="text-xl text-green-500 font-bold border-b border-gray-200 text-gray-800"></h3>
+     
+      
+    </div>
+    <!-- Message -->
+    <div class="mb-4">
+      <p id="modalMessage" class="text-gray-700 text-lg"></p>
+    </div>
+    <!-- OK Button -->
+    <div class="text-right">
+      <button type="button" id="modalClose" class="py-2 px-4 text-sm font-medium rounded bg-blue-600 text-white hover:bg-blue-700">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+    <div id="cover">
+        <div class="req_res_loader"></div>
+    </div>
+
+  <label for="lbltnxid" id="lbltnxid" class="hidden"></label>
+  <label for="lblexcelid" id="lblexcelid" class="hidden"></label>
+  <label for="lblmerchantorderid" id="lblmerchantorderid" class="hidden"></label>
+
+  <script src="/assets/js/jquery-3.6.0.min.js"></script>
+  <script src="/assets/js/jquery-3.6.4.min.js"></script>
+   
+    <script src="/assets/js/globalAjax.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script> -->
+  <script src="/assets/flatpickr.js"></script>
+  <script src="/assets/js/common_scripts.js"></script>
+
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    window.addEventListener('load', () => {
+      // confetti({
+      //   particleCount: 200,
+      //   spread: 120,
+      //   origin: { y: 0.6 }
+      // });
+
+         const urlParams = new URLSearchParams(window.location.search);
+         const paymentid = urlParams.get('txnid');
+         const excelid = urlParams.get('excelid');
+         const merchantOrderId = urlParams.get('merchantOrderId');
+        $('#lbltnxid').text(paymentid);
+        $('#lblexcelid').text(excelid);
+        $('#lblmerchantorderid').text(merchantOrderId);
+        $('#kyc_link').attr('href', `/kyc.html?tnxid=${paymentid}&excelid=${excelid}`);
+      load();
+    });
+
+
+function load() {
+  const data = [
+    $('#lbltnxid').text().trim(),
+    $('#lblexcelid').text().trim(),
+    $('#lblmerchantorderid').text().trim()
+  ];
+
+  $.ajax({
+    url: '/successtxnidupdate',
+    type: 'POST',
+    contentType: 'application/json', // ✅ send JSON properly
+    data: JSON.stringify({ data: data }),
+     
+    success: function (response) {
+      console.log('Server Response:', response);
+
+      if (response.success === false) {
+        $('#icon').addClass('hidden');
+        $('#errorimg').removeClass('hidden');     
+        $('body').removeClass('bg-gray-100').addClass('bg-red-[#FF5C5C]');
+        $('#icon')
+          .removeClass('fa-circle-check text-green-600')
+          .addClass('fa-circle-xmark text-red-600');
+        $('#header').text('Payment Failed!');
+        $('#message').text('There was an issue with your transaction. Please try again.');
+        $("#kyc_link").addClass("hidden");
+      } else {
+        confetti({
+        particleCount: 200,
+        spread: 120,
+        origin: { y: 0.6 }
+      });
+      console.log('Payment update success');
+      $("#kyc_link").removeClass("hidden");
+      }
+    },
+    error: function (error) {
+      console.error('Error updating payment status:', error);
+    }
+  });
+}
+
+
+function Succcess_support() {
+  const data = [
+    $('#lbltnxid').text().trim(),
+    $('#lblexcelid').text().trim(),
+    $("#su_name").val(),
+    $("#su_description").val()
+  ];
+
+  $.ajax({
+    url: '/Succcess_support',
+    type: 'POST',
+    contentType: 'application/json', // ✅ send JSON properly
+    data: JSON.stringify({ data: data }),
+        beforeSend: function () {
+            $("#cover").show();
+        },
+    success: function (response) {
+      console.log('Server Response:', response);
+
+      if (response.success == true) {
+        showmobilenumber('Success!', response.message);
+         $("#su_name").val(""),
+        $("#su_description").val("")
+       document.getElementById('support_Modal').style.display = 'none';
+      } else {
+       
+  
+      }
+    },
+    error: function (error) {
+      console.error('Error updating payment status:', error);
+    }
+  });
+}
+
+
+
+  // Support button click event
+  document.getElementById('supportbtn').addEventListener('click', function() {
+    document.getElementById('support_Modal').style.display = 'flex';
+  });
+
+  // Function to close the modal
+  function closeModal() {
+    document.getElementById('support_Modal').style.display = 'none';
+  }
+
+
+</script>
+</body>
+</html>

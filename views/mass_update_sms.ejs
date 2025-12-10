@@ -1,0 +1,111 @@
+<html>
+<body>
+<div id="mainPage" class="w-[98%] bg-white shadow-2xl p-2 mt-2 rounded-2xl  transition duration-300w-[98%] bg-white shadow-2xl p-2 mt-2 rounded-2xl justify-self-center transition duration-300" style="box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35);">
+    
+    <div class="flex items-center justify-center mb-1">
+        <h2 class="text-gray-900">
+            <!-- <svg class="w-6 h-6 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg> -->
+            Mass Update
+        </h2>
+    </div>
+  
+
+      <!-- <div class="flex justify-end">
+          <a  href="/Policy_details"
+               class="text-sm font-medium text-indigo-600 hover:text-indigo-800 transition duration-150 underline decoration-2 underline-offset-4">
+               Policy Details
+            </a>
+        </div> -->
+
+    <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-end justify-self-center gap-4 mt-3 mb-2">
+
+        <div class="flex flex-col w-full sm:w-auto">
+            <label class="text-xs font-semibold text-gray-600 mb-1">From Date</label>
+            <input id="FromDate" type="text" placeholder="From Date" readonly
+                class="border border-gray-300 bg-gray-50 rounded-lg px-3 py-1 text-gray-700 w-full 
+                          focus:ring-1 focus:ring-orange-500 focus:border-orange-500 focus:outline-none cursor-pointer" />
+        </div>
+
+        <div class="flex flex-col w-full sm:w-auto">
+            <label class="text-xs font-semibold text-gray-600 mb-1">To Date</label>
+            <input id="ToDate" type="text" placeholder="To Date" readonly
+                class="border border-gray-300 bg-gray-50 rounded-lg px-3 py-1 text-gray-700 w-full 
+                          focus:ring-1 focus:ring-orange-500 focus:border-orange-500 focus:outline-none cursor-pointer" />
+        </div>
+
+        <div class="flex w-full sm:w-auto">
+            <button id="viewBtn"
+                class="font-semibold px-6 py-1 primary-button w-full sm:w-auto">
+                View
+            </button>
+        </div>
+
+        <div >
+          <a  href="/Policy_details"
+               class="text-sm font-medium text-indigo-600 hover:text-indigo-800 transition duration-150 underline decoration-2 underline-offset-4">
+               Policy Details
+            </a>
+        </div>
+    </div>
+
+    <!-- 🔹 Clean centered total count box -->
+    <div class="text-center mt-4 text-2xl font-bold text-gray-800" id="totalpolicy" style="display:none;">
+    Total Eligible Policies : <span id="totalCount" class="text-blue-700"></span>
+</div>
+
+
+
+   <div class="flex w-full flex justify-center" id="div_send" style="display:none;">
+            <button id="sendBtn"
+                class="font-semibold px-6 py-2 primary-button w-full sm:w-auto mt-2 sm:mt-6">
+                Send
+            </button>
+        </div>
+
+
+
+              <!--Popup modal-->
+ <div style="z-index: 100000;" id="hs-modal" class="hs-overlay hidden fixed inset-0 z-50 bg-black bg-opacity-70 backdrop-blur-[12px] flex items-center justify-center" role="dialog" aria-modal="true">
+  <div class="bg-white rounded-xl w-full max-w-md p-6 shadow-lg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" >
+    <!-- Header -->
+    <div class="mb-4">
+      <h3 id="modalHeader" class="text-xl text-green-500 font-bold border-b border-gray-200 text-gray-800"></h3>
+     
+      
+    </div>
+    <!-- Message -->
+    <div class="mb-4">
+      <p id="modalMessage" class="text-gray-700 text-lg"></p>
+    </div>
+    <!-- OK Button -->
+    <div class="text-right">
+      <button type="button" id="modalClose" class="py-2 px-4 text-sm font-medium rounded bg-green-600 text-white hover:bg-green-700">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+   
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link  href="https://unpkg.com/tabulator-tables@6.2.0/dist/css/tabulator.min.css" rel="stylesheet"/>
+<script src="https://unpkg.com/tabulator-tables@6.2.0/dist/js/tabulator.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<link href="https://unpkg.com/tabulator-tables@6.2.0/dist/css/tabulator.min.css" rel="stylesheet"/>
+<script src="https://unpkg.com/tabulator-tables@6.2.0/dist/js/tabulator.min.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="/assets/js/mass_update/mass_update.js"></script>
+<script src="/assets/js/common_scripts.js"></script>
+<script src="/assets/js/globalGridTheme.js"></script>
+<script src="/assets/js/globalAjax.js"></script>
+
+<!-- <script src="/assets/js/jquery-3.6.4.min.js"></script> -->
+   <!-- ⭐ Loader Overlay (place here before </body>) -->
+    <div id="cover">
+        <div class="req_res_loader"></div>
+    </div>
+</body>
+</html>

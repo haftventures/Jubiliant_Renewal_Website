@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyc</title>
+     <script src="/assets/js/tailwind.js"></script>
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ 
+  <link rel="stylesheet" href="/assets/flatpickr.min.css"/>
+
+
+</head>
+ <body >
+  <div class="flex justify-end p-4 fixed right-0 hover:underline underline-offset-8" id="supportbtn">
+ <a class="flex items-center justify-center w-full space-x-2"><i class="fa-solid fa-headset"></i><span>Support</span></a>
+  </div>
+    
+
+    <div class="min-h-screen flex items-center justify-center px-4">
+        <div class="w-full max-w-md bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+
+            <h1 class="text-2xl font-semibold text-gray-800 mb-6 text-center">
+                Kyc Details
+            </h1>
+
+            <form class="space-y-4">
+
+                <div>
+                    <label class="block text-gray-700 font-medium mb-1">First Name<span class="text-red-600">*</span></label>
+                    <input
+                        type="text"
+                        maxlength="50"
+                        id="name"
+                          data-placeholder="First Name"
+                        placeholder="Enter your first name"
+                        class="w-full px-3 text_all kyc_txtchk  py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                    />
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-medium mb-1">Last Name</label>
+                    <input
+                        type="text"
+                        maxlength="50"
+                        id="last_name"
+                        placeholder="Enter your last name"
+                        class="w-full px-3 py-2 text_all  border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                    />
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-medium mb-1">PAN Card Number<span class="text-red-600">*</span></label>
+                    <input
+                        type="text"
+                        maxlength="10"
+                        id="pan_card"
+                        
+                        data-placeholder="PAN Card Number"
+                        placeholder="ABCDE1234F"
+                        class="w-full px-3 py-2 text_all kyc_txtchk uppercase border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                    />
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-medium mb-1">Date of Birth<span class="text-red-600">*</span></label>
+                    <input
+                        type="text" readonly id="dob" placeholder="dd/mm/yyyy" data-placeholder="Date of Birth"
+                        class="w-full px-3 py-2 text_all kyc_txtchk border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                    />
+                </div>
+
+                <button
+                    type="button"
+                    id="save"
+               
+                    class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition font-medium"
+                >
+                    Submit
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+   
+
+    <!-- Modal Background -->
+   <div id="support_Modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+
+  <!-- Modal Box -->
+  <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-6">
+    
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-4">
+       <!-- <div class="flex items-center gap-2">
+      <i class="fa-solid fa-headset text-xl"></i>
+        <span class="text-gray-800 font-semibold text-sm">Support</span>
+       </div> -->
+       <div class="flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-700" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+      </svg></svg>
+       <span class="text-center text-transform-capitalize text-[20px] text-black font-bold">Rise Your Queries</span>
+       </div>
+       
+      <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+    </div>
+
+    <!-- Form -->
+    <div class="space-y-4">
+
+      <!-- Name -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Header</label>
+        <input type="text" id="kyc_name" maxlength="50" class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none" placeholder="Enter Header">
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Description</label>
+        <textarea id="kyc_description" maxlength="1000" class="w-full px-3 py-2 border rounded-lg h-28 resize-none focus:ring focus:ring-blue-300 outline-none" placeholder="Enter description"></textarea>
+      </div>
+
+    </div>
+
+    <!-- Footer Buttons -->
+    <div class="mt-6 flex justify-end gap-3">
+      <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Cancel</button>
+      <button id="save_btn" onclick="Kyc_support()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Submit</button>
+    </div>
+
+  </div>
+   </div>
+
+ <!--Popup modal-->
+ <div style="z-index: 100000;" id="hs-modal" class="hs-overlay hidden fixed inset-0 z-50 bg-black bg-opacity-70 backdrop-blur-[12px] flex items-center justify-center" role="dialog" aria-modal="true">
+  <div class="bg-white rounded-xl w-full max-w-md p-6 shadow-lg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" >
+    <!-- Header -->
+    <div class="mb-4">
+      <h3 id="modalHeader" class="text-xl text-green-500 font-bold border-b border-gray-200 text-gray-800"></h3>
+     
+      
+    </div>
+    <!-- Message -->
+    <div class="mb-4">
+      <p id="modalMessage" class="text-gray-700 text-lg"></p>
+    </div>
+    <!-- OK Button -->
+    <div class="text-right">
+      <button type="button" id="modalClose" class="py-2 px-4 text-sm font-medium rounded bg-blue-600 text-white hover:bg-blue-700">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+    </form>
+  </div>
+
+   <div id="cover">
+        <div class="req_res_loader"></div>
+    </div>
+
+    <label for="lbltnxid" id="lbltnxid" class="hidden"></label>
+    <label for="lblexcelid" id="lblexcelid" class="hidden"></label>
+    <label for="lblinsertedid" id="lblinsertedid" class="hidden"></label>
+
+    
+    <script src="/assets/js/jquery-3.6.0.min.js"></script>
+  <script src="/assets/js/jquery-3.6.4.min.js"></script>
+  <script src="/assets/js/globalAjax.js"></script>
+  <script src="/assets/flatpickr.js"></script>
+  <!-- <script src="/assets/js/payment/payment.js"> </script> -->
+  <script src="/assets/js/common_scripts.js"></script>
+
+<script>
+
+$(document).ready(function(){
+
+         const urlParams = new URLSearchParams(window.location.search);
+         const paymentid = urlParams.get('tnxid');
+         const excelid = urlParams.get('excelid');
+        $('#lbltnxid').text(paymentid);
+        $('#lblexcelid').text(excelid);
+        $(document).on('click',"#save",submitebtn);
+})
+
+
+var today = new Date();
+var tenYearsAgo = new Date();
+tenYearsAgo.setFullYear(today.getFullYear() - 18);
+
+flatpickr("#dob", {
+  dateFormat: "d/m/Y",
+  maxDate: tenYearsAgo,   
+  allowInput: false,
+  disableMobile: true, 
+  onReady: function(_, __, fp) {
+    const numInputs = fp.calendarContainer.querySelectorAll(".numInputWrapper");
+    numInputs.forEach(el => el.style.display = "none");
+    const sel = document.createElement("select");
+    sel.className = "fp-year";
+    const curY = today.getFullYear();
+    for (let y = curY - 80; y <= curY - 18; y++) {
+      const opt = document.createElement("option");
+      opt.value = y;
+      opt.textContent = y;
+      sel.appendChild(opt);
+    }
+    sel.value = fp.currentYear;
+    sel.onchange = () => fp.jumpToDate(new Date(sel.value, fp.currentMonth, 1));
+    const monthContainer = fp.calendarContainer.querySelector(".flatpickr-current-month");
+    if (monthContainer) monthContainer.appendChild(sel);
+    fp.calendarContainer.addEventListener("click", () => {
+      sel.value = fp.currentYear;
+    });
+  }
+});
+
+
+  // Support button click event
+  document.getElementById('supportbtn').addEventListener('click', function() {
+    document.getElementById('support_Modal').style.display = 'flex';
+  });
+
+  // Function to close the modal
+  function closeModal() {
+    document.getElementById('support_Modal').style.display = 'none';
+  }
+
+
+
+
+
+function submitebtn() {
+ if (chkdata(".kyc_txtchk") && chk_pan("pan_card")) {
+
+  const data = [
+    $('#lbltnxid').text().trim(),
+    $('#lblexcelid').text().trim(),
+    $('#name').val(),
+    $('#pan_card').val(),
+    $('#dob').val()
+  ];
+  $.ajax({
+    url: '/Kyc_submite_btn',
+    type: 'POST',
+    contentType: 'application/json', // ✅ send JSON properly
+    data: JSON.stringify({ data: data }),
+       beforeSend: function () {
+            $("#cover").show();
+        },
+    success: function (response) {
+       console.log('Server Response:', response);
+
+      if (response.success == true) {
+       showmobilenumber('Success!', response.message)
+       $("#lblinsertedid").text(response.insertedid);
+       clearall(".kyc_txtchk");
+       $("#last_name").val("")
+      } else  {
+         showmobilenumber('Error!', response.message)
+      }
+    },
+    error: function (error) {
+     const res = error.responseJSON;
+      console.error('Error updating payment status:', res.message);
+      showmobilenumber('Error!', res.message)
+    }
+  });
+}
+}
+
+
+function Kyc_support() {
+  const data = [
+    $('#lbltnxid').text().trim(),
+    $('#lblexcelid').text().trim(),
+    $("#kyc_name").val(),
+    $("#kyc_description").val()
+  ];
+
+  $.ajax({
+    url: '/Kyc_support',
+    type: 'POST',
+    contentType: 'application/json', // ✅ send JSON properly
+    data: JSON.stringify({ data: data }),
+       beforeSend: function () {
+            $("#cover").show();
+        },
+    success: function (response) {
+      console.log('Server Response:', response);
+
+      if (response.success == true) {
+       showmobilenumber('Success!', response.message)
+        $("#kyc_name").val(""),
+        $("#kyc_description").val("")       
+
+       document.getElementById('support_Modal').style.display = 'none';
+      } else  {
+         showmobilenumber('Error!', response.message)
+      }
+    },
+    error: function (error) {
+      const res = error.responseJSON;
+      console.error('Error updating payment status:', res.message);
+      showmobilenumber('Error!', res.message)
+    }
+  });
+}
+
+</script>
+
+
+</body>
+</html>

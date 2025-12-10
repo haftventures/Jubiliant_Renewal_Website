@@ -1,0 +1,124 @@
+<html>
+<body>
+<div class="flex justify-center">
+<div id="mainPage" class="w-[98%] bg-white shadow-2xl p-2 mt-2 rounded-2xl transition duration-300 justify-self-center" style="box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35);">
+
+    <!-- Title -->
+    <div class="flex items-center justify-center mb-1">
+        <h2 class="text-gray-900">
+            Policy Details
+        </h2>
+    </div>
+
+    <!-- Mass update -->
+    <!-- <div class="flex justify-end mb-1">
+        <a href="/mass_update_sms"
+           class="text-sm font-medium text-indigo-600 hover:text-indigo-800 underline decoration-2 underline-offset-4">
+            Mass Update
+        </a>
+    </div> -->
+
+    <!-- Filters -->
+    <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-end gap-4 items-center justify-center mt-3 mb-2flex flex-col sm:flex-row sm:flex-wrap sm:items-end gap-4 items-center justify-center mt-3 mb-2">
+
+        <!-- From Date -->
+        <div class="flex flex-col w-full sm:w-48">
+            <label class="text-xs font-semibold text-gray-600 mb-1">From Date</label>
+            <input id="FromDate" type="text" placeholder="Start Date" readonly
+                   class="border border-gray-300 bg-gray-50 rounded-lg px-3 py-1 text-gray-700 w-full 
+                          focus:ring-1 focus:ring-orange-500 focus:border-orange-500 focus:outline-none cursor-pointer" />
+        </div>
+
+        <!-- To Date -->
+        <div class="flex flex-col w-full sm:w-48">
+            <label class="text-xs font-semibold text-gray-600 mb-1">To Date</label>
+            <input id="ToDate" type="text" placeholder="End Date" readonly
+                   class="border border-gray-300 bg-gray-50 rounded-lg px-3 py-1 text-gray-700 w-full
+                          focus:ring-1 focus:ring-orange-500 focus:border-orange-500 focus:outline-none cursor-pointer" />
+        </div>
+
+        <!-- View Button -->
+        <div class="flex w-full sm:w-auto">
+            <button id="viewBtn"
+                class="font-semibold px-6 py-1 primary-button w-full sm:w-auto">
+                View
+            </button>
+        </div>
+
+        <div >
+        <a href="/mass_update_sms"
+           class="text-sm font-medium text-indigo-600 hover:text-indigo-800 underline decoration-2 underline-offset-4">
+            Mass Update
+        </a>
+    </div>
+
+    </div>
+
+    <!-- Total Count -->
+    <div class="mt-4 text-center">
+        <span class="text-gray-800">Total Count:</span>
+        <label id="lbltotal_count" class="font-bold">0</label>
+    </div>
+
+</div>
+</div>
+
+
+ <!-- Tabulator Grid -->
+  
+   <!-- <div class="p-2"> -->
+    <div class="mt-3 w-[98%] justify-self-center">
+       <div id="dynamicTable" class="overflow-x-auto mt-3"></div>
+    </div>
+  
+
+   <div class="flex w-full flex justify-center mb-3" id="div_send" style="display:none;">
+            <button id="sendBtn"
+                class="font-semibold px-6 py-2 primary-button w-full sm:w-auto mt-2 sm:mt-6">
+                Send
+            </button>
+        </div>
+
+
+         <!--Popup modal-->
+ <div style="z-index: 100000;" id="hs-modal" class="hs-overlay hidden fixed inset-0 z-50 bg-black bg-opacity-70 backdrop-blur-[12px] flex items-center justify-center" role="dialog" aria-modal="true">
+  <div class="bg-white rounded-xl w-full max-w-md p-6 shadow-lg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" >
+    <!-- Header -->
+    <div class="mb-4">
+      <h3 id="modalHeader" class="text-xl text-green-500 font-bold border-b border-gray-200 text-gray-800"></h3>
+     
+      
+    </div>
+    <!-- Message -->
+    <div class="mb-4">
+      <p id="modalMessage" class="text-gray-700 text-lg"></p>
+    </div>
+    <!-- OK Button -->
+    <div class="text-right">
+      <button type="button" id="modalClose" class="py-2 px-4 text-sm font-medium rounded bg-green-600 text-white hover:bg-green-700">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<link href="https://unpkg.com/tabulator-tables@6.2.0/dist/css/tabulator.min.css" rel="stylesheet"/>
+<script src="https://unpkg.com/tabulator-tables@6.2.0/dist/js/tabulator.min.js"></script> -->
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
+<script src="/assets/js/Policy_details/Policy_details.js"></script>
+<script src="/assets/js/common_scripts.js"></script>
+<script src="/assets/js/globalGridTheme.js"></script>
+<script src="/assets/js/globalAjax.js"></script>
+
+<!-- <script src="/assets/js/jquery-3.6.4.min.js"></script> -->
+   <!-- ⭐ Loader Overlay (place here before </body>) -->
+    <div id="cover">
+        <div class="req_res_loader"></div>
+    </div>
+</body>
+</html>

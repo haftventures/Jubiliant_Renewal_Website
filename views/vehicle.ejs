@@ -1,0 +1,168 @@
+<div id="mainPage" class="w-full  shadow-[0_0_15px_rgba(36,97,231,0.8)]  p-4 sm:p-6 md:p-8  mt-5 rounded-xl mb-5">
+   <h1 class="flex-1 text-center text-xl font-semibold text-gray-800 mb-6">Payment Entry Update</h1>
+  
+  <!-- Header Form -->
+  <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-end justify-self-center gap-4 mb-6">
+   
+    <!-- From Date -->
+    <div class="flex flex-col w-full sm:w-auto">
+      <label for="fromDate" class="text-gray-700 font-medium mb-1">From Date</label>
+      <input
+        id="FromDate"
+        type="text"
+        placeholder="From Date"
+        readonly
+        class="border border-gray-300 rounded-lg px-3 py-2 w-full sm:w-48 focus:outline-none focus:ring-1 focus:ring-blue-700 bg-white focus:outline-none "
+      />
+    </div>
+
+    <!-- To Date -->
+    <div class="flex flex-col w-full sm:w-auto">
+      <label for="endDate" class="text-gray-700 font-medium mb-1">To Date</label>
+      <input
+        id="ToDate"
+        type="text"
+        placeholder="To Date"
+        readonly
+        class="border border-gray-300 rounded-lg px-3 py-2 w-full sm:w-48 focus:outline-none focus:ring-1 focus:ring-blue-700 bg-white focus:outline-none "
+      />
+    </div>
+
+    <!-- View Button -->
+    <div class="flex w-full sm:w-auto">
+      <button
+        id="viewBtn"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg shadow w-full sm:w-auto mt-2 sm:mt-6"
+      >
+        View
+      </button>
+    </div>
+  </div>
+<hr></hr>
+  <!-- Tabulator Grid -->
+  <div>
+  <!-- <div id="dynamicTable"></div> -->
+   <div class="p-4">
+  <div  class="flex justify-between items-center mb-4 ">
+    <input id="search_box" type="text" placeholder="Search..." class="border p-2 rounded w-64 hidden" />
+  </div>
+
+  <div id="dynamicTable" class="overflow-x-auto"></div>
+</div>
+  </div>
+</div>
+
+<div id="savepage" class="flex flip-container justify-center px-4 py-12 Box_binfo2 hidden">
+  <div class="w-full flipper max-w-5xl">
+    <div class="shadow-[0_0_15px_rgba(36,97,231,0.8)] rounded-lg p-6">
+      <!-- Search Section -->
+      <section class="container mx-auto bg-white py-10 rounded-xl px-10 mt-1 box1 flex justify-center">
+        <div class="w-full bg-gray-50 py-12 px-8 rounded-lg">
+          <div class="flex items-center mb-6">
+            <h1 class="flex-1 text-center text-xl font-semibold text-gray-800">Payment Entry Update</h1>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="txt_Transaction_Id" class="block mb-2 text-sm font-medium">
+                Transaction Id<span class="text-red-600">*</span>
+              </label>
+              <input type="text" id="txt_Transaction_Id"  data-placeholder="Transaction Id" maxlength="60" tabindex="1"
+                class="validate-input vehicle_txt_chk w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+             
+            </div>
+
+            <div>
+              <label for="txt_Upi_Id" class="block mb-2 text-sm font-medium">
+                Upi Id<span class="text-red-600">*</span>
+              </label>
+              <input type="text" id="txt_Upi_Id" maxlength="60" tabindex="2" data-placeholder="Upi Id"
+                class="w-full p-2 mb-3 vehicle_txt_chk border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+            </div>
+
+            <div>
+              <label for="txt_Upi_Name" class="block mb-2 text-sm font-medium">
+                Upi Name<span class="text-red-600">*</span>
+              </label>
+              <input type="text" id="txt_Upi_Name" maxlength="60" tabindex="3" data-placeholder="Upi Name"
+                class="w-full p-2 border vehicle_txt_chk rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+            </div>
+
+            <div>
+              <label for="txt_Amount" class="block mb-2 text-sm font-medium">
+               Amount<span class="text-red-600">*</span>
+              </label>
+              <input type="text" id="txt_Amount" maxlength="60" data-placeholder="Amount" keypress="return isNumberKey(event)" tabindex="4"
+                class="w-full p-2 border vehicle_txt_chk rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+            </div>
+
+            <div>
+              <label for="Payment_Date" class="block mb-2 text-sm font-medium">
+                Payment Date<span class="text-red-600">*</span>
+              </label>
+              <input type="text" id="Payment_Date" maxlength="60" readonly tabindex="5" data-placeholder="Payment Date"
+                class="w-full  p-2 border vehicle_txt_chk rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+            </div>
+          </div>
+
+       
+
+  <div class="flex justify-center mt-9 gap-x-4">
+  <button
+    id="Btn_save"
+    type="button"
+    tabindex="6"
+    class="w-full md:max-w-96 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+  >
+    Save
+  </button>
+
+  <button
+    id="Btn_back"
+    type="button"
+    tabindex="7"
+    class="w-full md:max-w-96 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+  >
+    Back
+  </button>
+</div>
+
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+
+
+ <!--Popup modal-->
+ <div style="z-index: 100000;" id="hs-modal" class="hs-overlay hidden fixed inset-0 z-50 bg-black bg-opacity-70 backdrop-blur-[12px] flex items-center justify-center" role="dialog" aria-modal="true">
+  <div class="bg-white rounded-xl w-full max-w-md p-6 shadow-lg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" >
+    <!-- Header -->
+    <div class="mb-4">
+      <h3 id="modalHeader" class="text-xl text-green-500 font-bold border-b border-gray-200 text-gray-800"></h3>
+     
+      
+    </div>
+    <!-- Message -->
+    <div class="mb-4">
+      <p id="modalMessage" class="text-gray-700 text-lg"></p>
+    </div>
+    <!-- OK Button -->
+    <div class="text-right">
+      <button type="button" id="modalClose" class="py-2 px-4 text-sm font-medium rounded bg-green-600 text-white hover:bg-green-700">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+      <label for="lblpolicyid" id="lblpolicyid" class="block mb-2 text-sm font-medium hidden"></label>
+      <label for="lblpayment_status" id="lblpayment_status" class="block mb-2 text-sm font-medium hidden"></label>
+        <label for="lblcreate_by" id="lblcreate_by" class="block mb-2 text-sm font-medium hidden"></label>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<script src="/assets/js/globalGridTheme.js"></script>
+<script src="/assets/js/vehicle/vehicle.js"></script>
+<script src="/assets/js/common_scripts.js"></script>

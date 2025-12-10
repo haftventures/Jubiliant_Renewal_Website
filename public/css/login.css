@@ -1,0 +1,200 @@
+/* Buttons */
+.loginbutton {
+	border-radius: 20px;
+	border: 1px solid #0057ff;
+	background-color: #0057ff;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+.loginbutton:active {
+	transform: scale(0.95);
+}
+
+.loginbutton:focus {
+	outline: none;
+}
+
+.loginbutton.ghost {
+	background-color: transparent;
+	border-color: #FFFFFF;
+}
+
+/* Form */
+form {
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 50px;
+	height: 100%;
+	text-align: center;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+input {
+	background-color: #eee;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+/* Container */
+.container {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 768px;
+	max-width: 100%;
+	min-height: 480px;
+	margin: auto;
+}
+
+/* Form Containers */
+.form-container {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	transition: all 0.6s ease-in-out;
+	width: 50%;
+}
+
+.sign-in-container {
+	left: 0;
+	z-index: 2;
+}
+
+.container.right-panel-active .sign-in-container {
+	transform: translateX(100%);
+}
+
+.sign-up-container {
+	left: 0;
+	opacity: 0;
+	z-index: 1;
+}
+
+.container.right-panel-active .sign-up-container {
+	transform: translateX(100%);
+	opacity: 1;
+	z-index: 5;
+	animation: show 0.6s;
+}
+
+@keyframes show {
+	0%, 49.99% { opacity: 0; z-index: 1; }
+	50%, 100% { opacity: 1; z-index: 5; }
+}
+
+/* Overlay */
+/* .overlay-container {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+	transition: transform 0.6s ease-in-out;
+	z-index: 100;
+} */
+
+.overlay-container {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+	transition: transform 0.6s ease-in-out;
+	z-index: 100;
+}
+
+
+.container.right-panel-active .overlay-container {
+	transform: translateX(-100%);
+}
+
+.overlay {
+	background: linear-gradient(to right, #0057ff, #0057ff);
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: #FFFFFF;
+	position: relative;
+	left: -100%;
+	height: 100%;
+	width: 200%;
+	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+}
+
+.container.right-panel-active .overlay {
+	transform: translateX(50%);
+}
+
+.overlay-panel {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 40px;
+	text-align: center;
+	top: 0;
+	height: 100%;
+	width: 50%;
+	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left { transform: translateX(-20%); }
+.container.right-panel-active .overlay-left { transform: translateX(0); }
+
+.overlay-right { right: 0; transform: translateX(0); }
+.container.right-panel-active .overlay-right { transform: translateX(20%); }
+
+/* Social Buttons */
+.social-container {
+	margin: 20px 0;
+}
+
+.social-container a {
+	border: 1px solid #DDDDDD;
+	border-radius: 50%;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 5px;
+	height: 40px;
+	width: 40px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+	.container { width: 90%; min-height: 400px; }
+	.form-container { width: 100%; }
+	.overlay-container { display: none; }
+}
+
+@media (max-width: 768px) {
+.container { width: 40%; min-height: 400px; }
+	.form-container { width: 100%; }
+	.overlay-container { display: none; }
+}
+
+@media (max-width: 480px) {
+	.container { min-height: 360px; }
+	.loginbutton { padding: 8px 25px; font-size: 10px; }
+	form { padding: 0 10px; }
+	.social-container a { height: 35px; width: 35px; }
+}

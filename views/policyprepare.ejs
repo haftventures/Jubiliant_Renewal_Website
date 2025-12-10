@@ -1,0 +1,306 @@
+  </div>
+
+
+  
+<div id="mainPage" class="w-full bg-white shadow-2xl p-2 md:p-4 rounded-2xl border border-gray-100 transition duration-300 hover:shadow-[0_0_20px_rgba(30,144,255,0.2)]" style="box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35);">
+<div class="flex items-center mb-1 pb-2">    
+    <div class="flex-grow flex justify-center"></div>    
+    <h2 class="text-gray-900 flex justify-center items-center whitespace-nowrap" style="text-align:center">
+        Policy Preparation  
+    </h2>
+    
+    <div class="flex-grow flex justify-end">
+        <button id="refreshBtn" class="primary-button font-extrabold py-2 px-4 rounded-lg transition duration-150 shadow-md flex items-center text-[14px]">
+            <i id="refreshIcon" class="fas fa-sync-alt animate-spin-on-click"></i>
+             &nbsp;&nbsp;<label for="refreshBtn" class="font-medium">Refresh</label>
+        </button>
+    </div>
+</div>
+
+    <div class="text-center mt-1 flex gap-6 text-[14px] justify-center">
+      <div class="bg-white p-2 rounded-lg shadow-sm border border-gray-200 h-[40px]">
+        <span class="text-black font-bold">Fresh Count :</span>
+        <label id="lblcount_fresh" class="text-[#47e647] font-semibold">15</label>
+      </div>
+      <div class="bg-white p-2 rounded-lg shadow-sm border border-gray-200 h-[40px]">
+        <span class="text-black font-bold">Waiting Count :</span>
+        <label id="lblcount_waiting" class="text-[#ffab23] font-semibold">5</label>
+      </div>
+    </div>
+
+
+    <div class="p-1 mt-1 mb-3">
+        <div class="flex justify-between items-center ">
+          <input
+            id="search_box"
+            type="text"
+            placeholder="Search..."
+            class="border p-2 rounded w-64 hidden"
+          />
+        </div>
+        <div id="dynamicTable" class="overflow-x-auto"></div>
+    </div>
+
+   <div class="p-1">
+        <div class="flex justify-between items-center">
+          <input
+            id="search_box"
+            type="text"
+            placeholder="Search..."
+            class="border p-2 rounded w-64 hidden"
+          />
+        </div>
+        <div id="gridTable2" class="overflow-x-auto"></div>
+   </div>
+</div>
+
+
+<div id="secoundPage" class="w-full shadow-[0_0_15px_rgba(255,140,66,0.7)] p-4 sm:p-6 md:p-8  mt-5 rounded-xl mb-5 hidden">
+  <h1 class="flex-1 text-center text-xl font-semibold text-gray-800 mb-6">Policy Prepare</h1>
+  <div class="split-container">
+    
+    <div class="form-section">
+      <h2>Quotation Fresh Policy Details</h2>
+
+      <label for="payment_datee">Payment Datee</label>
+      <input type="text" class="tl_clear tl_textall " tabindex="1" readonly  id="tlpayment_datee" data-placeholder="Payment Datee">
+
+      <label for="customerName" >Customer Name</label>
+      <input type="text" class="tl_clear tl_textall " readonly tabindex="2" id="tlcustomerName" placeholder="Enter name" data-placeholder="Customer Name">
+
+      <label for="mobileNo">Mobile No.</label>
+      <input type="text" class="tl_clear tl_textall  mob" readonly tabindex="3" maxlength="10" onkeypress="return isNumberKey(event)" id="tlMobile" placeholder="Enter mobile" data-placeholder="Mobile No">
+
+      <label for="vehicleNo">Vehicle No.</label>
+      <input type="text" class="tl_clear tl_textall " readonly tabindex="4" id="vehicleNo" placeholder="Enter vehicle no." data-placeholder="vehicle no.">
+
+     <label for="tlmake">Make</label>
+      <input type="text" class="tl_clear tl_textall " readonly tabindex="5" id="tlmake" data-placeholder="Make">
+
+         <label for="tlmodel">Model</label>
+      <input type="text" class="tl_clear tl_textall " readonly tabindex="6" id="tlmodel" data-placeholder="Model">
+
+      <label for="tlmake">Idv</label>
+      <input type="text" class="tl_clear tl_textall " readonly tabindex="7" id="tlidv" data-placeholder="Idv">
+
+        <label for="tlMobile">amount</label>
+      <input type="text" class="tl_clear tl_textall " readonly tabindex="8" id="tlamount" data-placeholder="Amount">
+
+     
+
+
+         <label for="tlmodel">Transactionid</label>
+      <input type="text" class="tl_clear tl_textall " readonly tabindex="9" id="tltransactionid" data-placeholder="Transactionid">
+
+       <label for="tlmodel">Merchentorderid</label>
+      <input type="text" class="tl_clear tl_textall " readonly tabindex="10" id="tlMerchentorderid" data-placeholder="Merchentorderid">
+
+      <label for="tlmodel">Regdate</label>
+      <input type="text" class="tl_clear tl_textall " readonly tabindex="11" id="tlregdate" data-placeholder="Regdate">
+
+      <label for="tlmodel">Chasisno</label>
+      <input type="text" class="tl_clear tl_textall  chkno" readonly tabindex="12" id="tlchasisno" data-placeholder="Chasisno">
+
+       <label for="tlmodel">Engineno</label>
+      <input type="text" class="tl_clear tl_textall  chkno" readonly tabindex="13" id="tlengineno" data-placeholder="Engineno">
+
+      <label for="tlmodel">KYC Name</label>
+      <input type="text" class="tl_clear tl_textall " readonly  tabindex="14" id="tlkycname" data-placeholder="KYC Name">
+
+      <label for="tlmodel">Pan</label>
+      <input type="text" class="tl_clear tl_textall  " readonly tabindex="15" id="tlpan" data-placeholder="Pan">
+ 
+       <label for="tlmodel">DOB</label>
+      <input type="text" class="tl_clear tl_textall" readonly tabindex="16" id="tldob" data-placeholder="DOB">
+
+     <label for="tlmodel">Support Header</label>
+      <input type="text" class="tl_clear tl_textall " readonly tabindex="17" id="tlsupport_header" data-placeholder="Aadhar">
+
+       <label for="tlmodel">Support Description</label>
+       <textarea id="remarks" tabindex="18" rows="2" class="form-control tl_clear tl_textall resize-none" readonly id="tlsupport_description" ></textarea>
+
+
+      <!-- <button>Save</button>
+      <button class="cancel-btn">Cancel</button> -->
+    </div>
+
+    <div class="viewer-section">
+      
+      <div id="imageListContainer" style="display:flex; margin-bottom: 10px; margin-top: 10px; flex-wrap:nowrap; overflow-x:auto; white-space:nowrap; padding:6px 12px; gap:12px; width:620px; "></div>
+
+      <div class="viewer-container">
+        <img id="policyImage" src="">
+      </div>
+
+      <div class="">
+   <div class="flex items-center justify-center gap-3 mt-4">
+
+  <button onclick="prevImage()" 
+    class="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 active:scale-95 transition">
+    <i class="fas fa-arrow-left"></i>
+  </button>
+
+  <button onclick="rotateLeft()" 
+    class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 active:scale-95 transition flex items-center gap-2">
+    <i class="fas fa-undo-alt"></i> Left
+  </button>
+
+  <button onclick="rotateRight()" 
+    class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 active:scale-95 transition flex items-center gap-2">
+    <i class="fas fa-redo-alt"></i> Right
+  </button>
+
+  <button onclick="zoomOut()" 
+    class="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 active:scale-95 transition">
+    <i class="fas fa-search-minus"></i>
+  </button>
+
+  <button onclick="zoomIn()" 
+    class="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 active:scale-95 transition">
+    <i class="fas fa-search-plus"></i>
+  </button>
+
+  <button onclick="nextImage()" 
+    class="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 active:scale-95 transition">
+    <i class="fas fa-arrow-right"></i>
+  </button>
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Separate Office Use Layout (Bottom Section) -->
+ <div class="office-use">
+  <h3>Office Use Only</h3>
+
+  <div class="office-grid">
+   
+    <div>
+      <label for="Od">Od</label>
+      <input type="text" id="txt_od" maxlength="8" tabindex="19" onkeypress="return isNumberKey(event)" class="form-control tl_clear tl_textall tl_chk" data-placeholder="Od Amount">
+    </div>
+
+    <div>
+      <label for="Tp">Tp</label>
+      <input type="text" id="txt_tp" maxlength="8" tabindex="20" onkeypress="return isNumberKey(event)" class="form-control tl_clear tl_textall tl_chk" data-placeholder="Tp Amount">
+    </div>
+
+       <div>
+      <label for="agentName">Netpremium</label>
+      <input type="text" id="txt_netpremium" maxlength="8" tabindex="21" onkeypress="return isNumberKey(event)" class="form-control tl_clear tl_textall tl_chk" data-placeholder="Netpremium Amount">
+    </div>
+
+    <div>
+      <label for="issuedBy">Grosspremium</label>
+      <input type="text" id="txt_grosspremium" maxlength="8" tabindex="22" onkeypress="return isNumberKey(event)" class="form-control tl_clear tl_textall tl_chk" data-placeholder="Grosspremium Amount">
+    </div>
+ <div>
+      <label for="paymentMode">Company</label>
+      <select id="ddl_paymentMode" class="form-control tl_clear tl_textall tl_chk" tabindex="23" data-placeholder="Company">
+        <option value="0">Select Company</option>
+        <option value="icici">Icici</option>
+        <option value="hdfc">Hdfc</option>
+        <option value="sbi">Sbi</option>
+        <option value="axis">Axis</option>
+      </select>
+    </div>
+
+    <div> 
+      <label for="policyNo">Policy No</label>
+      <input type="text" id="policyNo" maxlength="30" tabindex="24" class="form-control tl_clear tl_textall tl_chk" data-placeholder="Enter Policy No">
+    </div>
+
+    <div>
+      <label for="ncb">NCB</label>
+      <select id="ddl_ncb" class="form-control tl_clear tl_textall tl_chk" tabindex="25" data-placeholder="NCB">
+        <option value="0">Select</option>
+        <option value="0%">0%</option>
+        <option value="20%">20%</option>
+        <option value="25%">25%</option>
+        <option value="35%">35%</option>
+        <option value="45%">45%</option>
+        <option value="50%">50%</option>
+      </select>
+    </div> 
+
+    <div>
+      <label for="startDate">Policy Start Date</label>
+      <input type="text" id="startDate" readonly tabindex="26" class="form-control tl_clear tl_textall tl_chk" data-placeholder="Policy Start Date">
+    </div>
+
+    <div>
+      <label for="endDate">Policy End Date</label>
+      <input type="text" id="endDate" readonly tabindex="27" class="form-control tl_clear tl_textall tl_chk" data-placeholder="Policy End Date">
+    </div>
+      <div>
+      <label for="remarks">Remarks</label>
+      <textarea id="remarks" rows="2" tabindex="28" class="form-control tl_clear tl_textall resize-none"  placeholder="Enter Remarks"></textarea>
+    </div>
+     <div>
+     <label for="pdfFile">Upload Policy PDF</label>
+      <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="pdfFile" name="policyPdf" accept="application/pdf" tabindex="29" class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4
+             file:rounded-lg file:border-0 file:text-sm file:font-semibold
+             file:bg-blue-600 file:text-white hover:file:bg-blue-700
+             border border-gray-300 rounded-lg shadow-sm cursor-pointer
+             focus:ring-2 focus:ring-blue-500 focus:outline-none tl_clear tl_chk" data-placeholder="Upload Policy PDF">
+      </form>
+      </div>
+  </div>
+
+ <div class="" style="text-align: center; margin-top: 20px;">
+  <button type="button" id="save_btn" tabindex="30" class="px-6 py-2 primary-button font-semibold rounded-lg shadow-md active:scale-95 transition">Save</button>
+  <button type="button" id="back_btn" tabindex="31" class="px-6 py-2 secondary-button font-semibold rounded-lg shadow-md active:scale-95 transition" style="margin-left: 10px;">Cancel</button>
+</div>
+</div>
+</div>
+
+
+
+
+ <!--Popup modal-->
+ <div style="z-index: 100000;" id="hs-modal" class="hs-overlay hidden fixed inset-0 z-50 bg-black bg-opacity-70 backdrop-blur-[12px] flex items-center justify-center" role="dialog" aria-modal="true">
+  <div class="bg-white rounded-xl w-full max-w-md p-6 shadow-lg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" >
+    <!-- Header -->
+    <div class="mb-4">
+      <h3 id="modalHeader" class="text-xl text-green-500 font-bold border-b border-gray-200 text-gray-800"></h3>
+     
+      
+    </div>
+    <!-- Message -->
+    <div class="mb-4">
+      <p id="modalMessage" class="text-gray-700 text-lg"></p>
+    </div>
+    <!-- OK Button -->
+    <div class="text-right">
+      <button type="button" id="modalClose" class="py-2 px-4 text-sm font-medium rounded bg-green-600 text-white hover:bg-green-700">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<label id="lblinsertedId" class="hidden"></label>
+<label id="lblprepare_pending" class="hidden">open</label>
+<label id="lblpolicyid" class="hidden"></label>
+<label id="lbl_pdf_base_string" class="hidden"></label>
+<!-- <label id="lblcount_fresh" class="hidden"></label>
+<label id="lblcount_waiting" class="hidden"></label> -->
+<style>
+/* ✅ Scrollbar styling (cannot be inline) */
+#imageListContainer::-webkit-scrollbar {
+  height: 4px;
+}
+#imageListContainer::-webkit-scrollbar-thumb {
+  background: #cccccc;
+  border-radius: 4px;
+}
+</style>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<script src="/assets/js/globalGridTheme.js"></script>
+<script src="/assets/js/globalAjax.js"></script>
+<script src="/assets/js/policyprepare_grid/policyprepare_grid.js"></script>
+<script src="/assets/js/common_scripts.js"></script>
