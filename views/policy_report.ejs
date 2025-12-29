@@ -7,7 +7,7 @@
     <div class="flex items-center justify-center mb-1">
         <h2 class="text-gray-900">
             <!-- <svg class="w-6 h-6 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg> -->
-           Payment Report
+           Policy Report
         </h2>
     </div>
 
@@ -15,12 +15,24 @@
 
   <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-end justify-self-center gap-4 mt-3 mb-2">
    
+
+         <div class="flex flex-col w-full sm:w-auto">
+              <label for="status" class="text-xs font-semibold text-gray-600 mb-1">
+                Status 
+              </label>
+              <select id="status_pr" tabindex="1"  data-placeholder="Status"
+                class="border status_pr border-gray-300 bg-gray-50 rounded-lg px-3 py-[6px] text-gray-700 w-full focus:ring-1 focus:ring-orange-500 focus:border-orange-500 cursor-pointer focus:outline-none">
+                <option value="0">-- Select --</option>
+
+              </select>
+            </div>
+
     <div class="flex flex-col w-full sm:w-auto">
       <label for="FromDate" class="text-xs font-semibold text-gray-600 mb-1">From Date</label>
       <input
         id="FromDate_pr"
         type="text"
-        tabindex="1"
+        tabindex="2"
         placeholder="From Date"
         readonly
         class="border border-gray-300 bg-gray-50 rounded-lg px-3 py-1 text-gray-700 w-full focus:ring-1 focus:ring-orange-500 focus:border-orange-500 focus:outline-none cursor-pointer"
@@ -32,23 +44,14 @@
       <input
         id="ToDate_pr"
         type="text"
-        tabindex="2"
+        tabindex="3"
         placeholder="To Date"
         readonly
         class="border border-gray-300 bg-gray-50 rounded-lg px-3 py-1 text-gray-700 w-full focus:ring-1 focus:ring-orange-500 focus:border-orange-500 cursor-pointer focus:outline-none"
       />
     </div>
 
-              <div class="flex flex-col w-full sm:w-auto">
-              <label for="status" class="text-xs font-semibold text-gray-600 mb-1">
-                Status 
-              </label>
-              <select id="status_pr" tabindex="3"  data-placeholder="Status"
-                class="border status_pr border-gray-300 bg-gray-50 rounded-lg px-3 py-[6px] text-gray-700 w-full focus:ring-1 focus:ring-orange-500 focus:border-orange-500 cursor-pointer focus:outline-none">
-                <option value="0">-- Select --</option>
-
-              </select>
-            </div>
+         
 
     <div class="flex w-full sm:w-auto">
       <button
@@ -58,14 +61,131 @@
         View
       </button>
     </div>
+
+ <div class="flex justify-self-end">
+  <button id="btn_policy_done_excel" class="bg-green-600 hidden text-white font-bold rounded-[4px] p-1 hover:bg-green-500">Export Excel</button>
+ </div>
+
   </div>
 
-  <!-- Tabulator Grid -->
-  <div>
-   <div class="p-2 mt-6 hidden" id="P_rgrid">
 
+     <div class="text-center  flex gap-6 text-[14px] justify-center">
+      <div class=" text-center bg-white p-2 rounded-lg shadow-sm border border-gray-200 h-[40px]">
+        <span class="text-gray-800">Total Count:</span>
+        <label id="lbltotal_count" class="font-bold">0</label>
+      </div>
+      </div>
+</div>
+
+ <!-- Tabulator Grid -->
+ <div class="p-2 mt-6 hidden  w-[98%] justify-self-center" id="P_rgrid">
+  
   <div id="dynamicTable_pr" class="overflow-x-auto"></div>
 </div>
+
+
+<!-- Modal Backdrop -->
+<div id="policyModal" 
+ class="hs-overlay  fixed inset-0 z-50 bg-black bg-opacity-70 backdrop-blur-[12px] hidden flex items-center justify-center mt-6">
+
+  <!-- Modal Box -->
+  <div class="bg-white w-full max-w-6xl rounded-xl shadow-lg overflow-hidden">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center px-6 py-3 border-b">
+      <h2 class="text-lg font-semibold">Policy Information</h2>
+      <button onclick="closeModal()" class="text-2xl font-bold">&times;</button>
+    </div>
+
+    <!-- Body -->
+    <div class="p-6 space-y-8 max-h-[75vh] overflow-y-auto">
+
+      <!-- ================= PAYMENT DETAILS ================= -->
+      <div>
+        <div class="bg-orange-100 text-orange-700 px-4 py-2 rounded font-semibold mb-4">
+          Payment Details
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+             <div class="info"><span>Customer Name</span> :&nbsp;<span id="customername" class="text-[12px]"></span></div>
+            <div class="info"><span>Make</span> :&nbsp;<span id="make" class="text-[12px]"></span></div>
+          <div class="info"><span>Model</span> :&nbsp;<span id="model" class="text-[12px]"></span></div>     
+          <div class="info"><span>Vehicle No</span> :&nbsp;<span id="vehicleno" class="text-[12px]"></span></div>
+          <div class="info"><span>Mobile No</span> :&nbsp;<span id="mobile" class="text-[12px]"></span></div>
+           <div class="info"><span>Transaction ID</span> :&nbsp;<span id="transactionid" class="text-[12px]"> </span></div>
+          <div class="info"><span>Payment Time</span> :&nbsp;<span id="payment_time" class="text-[12px]"> </span></div>
+          <div class="info"><span>Payment Amount</span> :&nbsp;<span id="Payment_amount" class="text-[12px]"> </span></div>
+
+        </div>
+      </div>
+
+      <!-- ================= KYC DETAILS ================= -->
+      <div>
+        <div class="bg-orange-100 text-orange-700 px-4 py-2 rounded font-semibold mb-4">
+          KYC Details
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div class="info"><span>KYC Name</span> :&nbsp;<span id="Kyc_name" class="text-[12px]"></span></div>
+          <div class="info"><span>PAN</span> :&nbsp;<span id="KYC_pan" class="text-[12px]"></span></div>
+          <div class="info"><span>Date of Birth</span> :&nbsp;<span id="KYC_dob" class="text-[12px]"></span></div>
+
+          <div class="info"><span>KYC Update Time</span> :&nbsp;<span id="kyc_update_time" class="text-[12px]"></span></div>
+          <div class="info hidden"><span>Support Update Time</span> :&nbsp;<span id="support_update_time" class="text-[12px]"></span></div>
+
+          <div class="info md:col-span-3 hidden">
+            <span>Support Subject</span>
+            <p id="support_header"></p>
+          </div>
+
+          <div class="info md:col-span-3 hidden">
+            <span>Support Description</span>
+            <p id="support_description"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= POLICY DETAILS ================= -->
+      <div>
+        <div class="bg-orange-100 text-orange-700 px-4 py-2 rounded font-semibold mb-4">
+          Policy Details
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+    
+          
+
+        
+          <div class="info"><span>Engine No</span> :&nbsp;<span id="engineno" class="text-[12px]"></span></div>
+
+          <div class="info"><span>Chassis No</span> :&nbsp;<span id="chasisno" class="text-[12px]"></span></div>
+          <div class="info"><span>OD</span> :&nbsp;<span id="od" class="text-[12px]"></span></div>
+          <div class="info"><span>TP</span> :&nbsp;<span id="tp" class="text-[12px]"></span></div>
+          <div class="info"><span>Net Premium</span> :&nbsp;<span id="netpremium" class="text-[12px]"> </span></div>
+          <div class="info"><span>GST</span> :&nbsp;<span id="gst" class="text-[12px]"> </span></div>
+
+            <div class="info"><span>Gross Premium</span> :&nbsp;<span id="grosspremium" class="text-[12px]"> </span></div>
+           <div class="info"><span>Difference Amount</span> :&nbsp;<span id="different_amount" class="text-[12px]"> </span></div>
+            <div class="info"><span>Policy Number</span> :&nbsp;<span id="policyno" class="text-[12px]"></span></div>
+          <div class="info"><span>Policy Start Date</span> :&nbsp;<span id="policy_start_date" class="text-[12px]"></span></div>
+          <div class="info"><span>Policy End Date</span> :&nbsp;<span id="policy_end_date" class="text-[12px]"></span></div>
+              <div class="info md:col-span-3"><span>Policy Remarks</span> :&nbsp;<span id="policy_remarks" class="text-[12px]"></span></div>
+                      <div class="info"><span>Company Name</span> :&nbsp;<span id="company" class="text-[12px]"> </span></div>
+ <div class="info"><span>NCB</span> :&nbsp;<span id="ncb" class="text-[12px]"> </span></div>
+<div class="info"><span>Policy Close Time</span> :&nbsp;<span id="policy_close_time" class="text-[12px]"> </span></div>
+        
+       
+        
+        
+
+    
+        </div>
+      </div>
+
+    </div>
+
+
+
   </div>
 </div>
 
@@ -92,6 +212,13 @@
     </div>
   </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+ $("#ex_excel").addClass("Http");
+
+});
+</script>
 <script src="/assets/js/globalGridTheme.js"></script>
 <script src="/assets/js/policy_report/policy_report.js"></script>
 <script src="/assets/js/common_scripts.js"></script>

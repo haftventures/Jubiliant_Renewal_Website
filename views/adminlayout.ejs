@@ -7,243 +7,232 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="msapplication-starturl" content="/">
   <title>Renewal</title>
+
   <script src="/assets/js/tailwind.js"></script>
   <script src="/assets/js/jquery-3.6.0.min.js"></script>
   <script src="/assets/js/jquery-3.6.4.min.js"></script>
   <script src="/assets/flatpickr.js"></script>
   <script src="/assets/tabulator.min.js"></script>
   <script src="/assets/xlsx.full.min.js"></script>
- 
+
   <link rel="stylesheet" href="/assets/googlefonts.css"/>
   <link rel="stylesheet" href="/assets/flatpickr.min.css"/>
   <link rel="stylesheet" href="/assets/tabulator.min.css"/>
-  <link rel="StyleSheet" href="/css/style.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body class="body">
-  <header>
-    <div class="navbar">
-      <!-- <div class="logo hidden">
-        <div class="logo-icon"><img class="w-50 h-10 rounded-lg object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnqUW5rpy85s0VUD3dOatNS-1ZPhwwIuWzmA&s"></div>
-        <div class="logo-text"></div>
-      </div> -->
-     
-      <div class="nav-links" id="navLinks">
-        <!-- Home with dropdown -->
-        <div class="nav-item hidden">
-          <a href="/home" class="nav-link">
-            <!-- <i class="fas fa-home"></i> -->
-           <img class="w-5 h-5" src="/assets/icons/home.png" alt="Home Icon"/>
-            <span>Home</span>
-          </a>
-        
-        </div>
+<header>
+  <div class="navbar">
 
-        <div class="nav-item">
-          <a href="/dashboard" class="nav-link">
-            <!-- <i class="fas fa-home"></i> -->
-           <img class="w-5 h-5" src="/assets/icons/Dashboardicon.png" alt="Dashboard Icon"/>
-            <span>Dashboard</span>
-          </a>
-        
-        </div>
+    <% if (login) { %>
+    <div class="nav-links" id="navLinks">
 
-        <div class="nav-item">
-          <a href="#" class="nav-link">
-            <!-- <i class="fas fa-home"></i> -->
-           <img class="w-5 h-5" src="/assets/icons/policy.png"/>
-            <span>Policy</span>
-            <i class="fas fa-caret-up icon_tr"></i>
-          </a>
-
-               <div class="dropdown-content">
-        
-          <a href="/Policy_details" class="dropdown-item">
-          <img class="w-5 h-5" src="/assets/icons/pd.png" alt="Home Icon"/>
-            <span>Policy Details</span>
-          </a>  
-          <a href="/policyprepare" class="dropdown-item">
-             <img class="w-5 h-5" src="/assets/icons/add-list.png" alt="Home Icon"/>
-            <span>Policy Preparation</span>
-          </a>  
-
-             <a href="/policy_report" class="dropdown-item">
-          <img class="w-5 h-5" src="/assets/icons/edf.png" alt="Home Icon"/>
-            <span>Policy Report</span>
-          </a>      
-            <a href="/report" class="dropdown-item hidden">
-           <img class="w-5 h-5" src="/assets/icons/report.png" alt="Home Icon"/>
-            <span>Payment Report</span>
-          </a>  
-           
-          
-          </div>
-        
-        </div>
-
-
-
-        
-      
-
-        
-         <div class="nav-item hidden">
-          <a href="/vehicle" class="nav-link">
-          <img class="w-5 h-5" src="/assets/icons/edf.png" alt="Home Icon"/>
-            <span>Payment Entry update</span>
-          </a> 
-        </div>
-
-        <!-- <div class="nav-item">
-          <a href="/policy_report" class="nav-link">
-          <img class="w-5 h-5" src="/assets/icons/edf.png" alt="Home Icon"/>
-            <span>Policy Report</span>
-          </a>       
-        </div> -->
-
-         <!-- <div class="nav-item">
-          <a href="/report" class="nav-link">
-           <img class="w-5 h-5" src="/assets/icons/report.png" alt="Home Icon"/>
-            <span>Payment Report</span>
-          </a>        
-        </div> -->
-
-        <!-- <div class="nav-item">
-          <a href="/policyprepare" class="nav-link">
-             <img class="w-5 h-5" src="/assets/icons/list.png" alt="Home Icon"/>
-            <span>Policy Preparation</span>
-          </a>        
-        </div> -->
-
-
-         <div class="nav-item">
-          <a href="/user_creation" class="nav-link">
-             <img class="w-5 h-5" src="/assets/icons/user-details.png" alt="Home Icon"/>
-            <span>User Creation</span>
-          </a>        
-        </div>
-         <!-- <div class="nav-item">
-          <a href="/Policy_details" class="nav-link">
-          <img class="w-5 h-5" src="/assets/icons/ue.png" alt="Home Icon"/>
-            <span>Policy Details</span>
-          </a>        
-        </div> -->
-        <div class="nav-item">
-          <a href="/support" class="nav-link">
-          <img class="w-5 h-5" src="/assets/icons/support.png" alt="Home Icon"/>
-            <span>Support</span>
-          </a>        
-        </div>
-        <!-- About with dropdown -->
-        
-        <!-- <div class="nav-item">
-          <a href="#" class="nav-link">
-          <i class="fas fa-heart"></i>
-            <span>Favorites</span>
-          </a>
-         
-        </div> -->
-        
-        <!-- Other menu items -->
-        <!-- <div class="nav-item">
-          <a href="/dashboard" class="nav-link">
-         <i class="fa-solid fa-chart-simple"></i>
-           <span>Dashboard</span>
-          </a>
-        </div>
-        
-
-        <div class="nav-item">
-           <a href="/schedule" class="nav-link">
-          <i class="fa-solid fa-clock"></i>
-           <span>Schedules</span>
-          </a>
-        </div>
-        
-           <div class="nav-item">
-          <a href="/onboardingprofissional" class="nav-link">
-           <i class="fa-solid fa-handshake"></i>
-            <span>Business</span>
-          </a>
-        </div>
-
-        <div class="nav-item">
-          <a href="/vehicle" class="nav-link">
-           <i class="fas fa-users"></i>
-            <span>Events</span>
-          </a>
-        </div> -->
-      
+      <!-- Dashboard (ALL USERS) -->
+          <% if (login.Roleid === 1) { %>
+      <div class="nav-item">
+        <a href="/dashboard" class="nav-link">
+          <img class="w-5 h-5" src="/assets/icons/Dashboardicon.png"/>
+          <span>Dashboard</span>
+        </a>
       </div>
-    
+        <% } %>
 
-         <% if (login) { %>
-      <div class="profile-section" id="profileSection">
-      
-        <div class="profile">
-          
-       
-        <% 
-          const agentName = (login && login.Agentname) ? String(login.Agentname) : '';
-          const displayName = agentName.length > 12 ? agentName.slice(0,12) + '...' : agentName;
-        %>
-        <span class="profile-name max-w-[12ch] truncate" title="<%= agentName %>"><%= displayName %></span>
-         <img src="https://img.freepik.com/free-psd/contact-icon-illustration-isolated_23-2151903337.jpg?semt=ais_hybrid&w=740" 
-               alt="Profile" class="profile-img">
-
-          <div class="profile-menu">
-             <i class="fas fa-caret-up" id="profile_tr"></i>
-           
-           
-            <!-- <a href="/profile" class="profile-menu-item">
-              <i class="fas fa-user"></i>
-              <span>My Profile</span>
-            </a>
-            <a href="#" class="profile-menu-item">
-              <i class="fas fa-key"></i>
-              <span>Change Password</span>
-            </a>
-            <a href="/feedback" class="profile-menu-item">
-              <i class="fas fa-comments"></i>
-              <span>Feedback</span>
-            </a>  -->
-            <a href="/logout" class="profile-menu-item">
-              <i class="fas fa-sign-out-alt"></i>
-              <span>Logout </span>
-            </a>  
-          </div>
-        </div>
+  <% if (login.Roleid == 2) { %>
+      <div class="nav-item">
+        <a href="#" class="nav-link">
+         <img class="w-5 h-5" src="/assets/icons/Dashboardicon.png"/>
+          <span>Dashboard</span>
+        </a>
       </div>
       <% } %>
+
+
+
+      <!-- POLICY MENU -->
+      <div class="nav-item">
+        <a href="#" class="nav-link">
+          <img class="w-5 h-5" src="/assets/icons/policy.png"/>
+          <span>Policy</span>
+          <i class="fas fa-caret-up icon_tr"></i>
+        </a>
+
+        <div class="dropdown-content">
+
+          <!-- Admin + Operation -->
+          <% if (login.Roleid === 1) { %>
+          <a href="/Policy_details" class="dropdown-item">
+            <img class="w-5 h-5" src="/assets/icons/pd.png"/>
+            <span>Policy Details</span>
+          </a>
+          <% } %>
+
+          <!-- Operation ONLY -->
+          <% if (login.Roleid === 2 || login.Roleid == 1) { %>
+          <a href="/policyprepare" class="dropdown-item">
+            <img class="w-5 h-5" src="/assets/icons/add-list.png"/>
+            <span>Policy Preparation</span>
+          </a>
+          <% } %>
+
+          <!-- Admin ONLY -->
+          <% if (login.Roleid === 1) { %>
+          <a href="/policy_report" class="dropdown-item">
+            <img class="w-5 h-5" src="/assets/icons/edf.png"/>
+            <span>Policy Report</span>
+          </a>
+          <% } %>
+
+        </div>
+      </div>
+
+      <!-- USER CREATION (ADMIN ONLY) -->
+      <% if (login.Roleid === 1) { %>
+      <div class="nav-item">
+        <a href="/user_creation" class="nav-link">
+          <img class="w-5 h-5" src="/assets/icons/user-details.png"/>
+          <span>User Creation</span>
+        </a>
+      </div>
+      <% } %>
+
+      <!-- SUPPORT (ALL USERS) -->
+          <% if (login.Roleid === 1) { %>
+      <div class="nav-item">
+        <a href="/support" class="nav-link">
+          <img class="w-5 h-5" src="/assets/icons/support.png"/>
+          <span>Support</span>
+        </a>
+      </div>
+       <% } %>
+
+
+
+        <!-- Make Dropdown -->
+ <% if (login.Roleid === 1 || login.Roleid === 2) { %>
+  <div class="nav-item dropdown">
+    <a href="#" class="nav-link">
+      <img class="w-5 h-5" src="/assets/icons/Make.png">
+      <span>Make</span>
+      <i class="fas fa-caret-down icon_tr"></i>
+    </a>
+
+    <div class="dropdown-content">
+      <a href="/Make" class="dropdown-item">
+        <img class="w-5 h-5" src="/assets/icons/qc2.png">
+        <span>Make QC 1</span>
+      </a>
+
+      <a href="/Make_qc_verified" class="dropdown-item">
+        <img class="w-5 h-5" src="/assets/icons/qc2.png">
+        <span>Make QC 2</span>
+      </a>
+
+      <% if (login.Roleid === 1) { %>
+        <a href="/Make_qc3" class="dropdown-item">
+          <img class="w-5 h-5" src="/assets/icons/qc2.png">
+          <span>Vehicle Make Edit</span>
+        </a>
+      <% } %>
+    </div>
+  </div>
+<% } %>
+
+
+    </div>
+    <% } %>
+    
+
+
+ 
+
+
+    <!-- PROFILE -->
+    <% if (login) { %>
+    <div class="profile-section" id="profileSection">
+      <div class="profile">
+
+        <% 
+          const agentName = String(login.Agentname || '');
+          const displayName = agentName.length > 12 ? agentName.slice(0,12) + '...' : agentName;
+        %>
+
+        <span class="profile-name" title="<%= agentName %>">
+          <%= displayName %>
+        </span>
+
+        <img src="https://img.freepik.com/free-psd/contact-icon-illustration-isolated_23-2151903337.jpg"
+             class="profile-img">
+
+        <div class="profile-menu">
+          <i class="fas fa-caret-up" id="profile_tr"></i>
+          <a href="/logout" class="profile-menu-item border-b border-gray-100">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <% } %>
+
       <button class="menu-toggle" id="menuToggle">
         <i class="fas fa-bars"></i>
       </button>
      
-    </div>
-  
-  </header>
-  
-  <main>
-    <%- body %>
-  </main>
-  
-  <!--loader-->
-   <!-- <div class="div_loader hidden" >
-    <span class="loader"></span>
-    </div> -->
-  
-   <!-- <div id="cover">
-        <div class="req_res_loader"></div>
-    </div> -->
 
-    
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="/assets/js/globalAjax.js"></script>
-  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-  <script src="assets/main.js"> </script>
-  
+  </div>
+</header>
+
+<main>
+  <%- body %>
+</main>
+
+<div id="cover">
+  <div class="req_res_loader"></div>
+</div>
+
+<script src="/assets/js/globalAjax.js"></script>
+<script src="/assets/main.js"></script>
+
+ <script src="assets/main.js"> </script>
+    <script>
+      let inactiveTime = 15 * 60 * 1000;
+      let timer;
+
+      function resetTimer() {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+              window.location.href = "/logout";
+          }, inactiveTime);
+      }
+
+      document.onmousemove = resetTimer;
+      document.onkeypress = resetTimer;
+      document.onclick = resetTimer;
+      document.onscroll = resetTimer;
+      document.onselectionchange = resetTimer;
+
+      window.onload = resetTimer;
+
+async function checkSession(callback) {
+    const response = await fetch("/check-session", {
+        credentials: "include"
+    });
+
+    const data = await response.json();
+
+    if (!data.active) {
+        window.location.href = "/logout";
+        return;
+    }
+
+    callback();
+}
+
+  </script>
  
-
 
 </body>
 </html>

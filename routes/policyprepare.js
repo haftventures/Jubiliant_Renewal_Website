@@ -4,19 +4,20 @@ const fs = require('fs');
 const path = require('path');
 const router = express.Router();
 const apiCaller = require('../apicaller');
-
+const allowRoles = require('../routes/Middleware');
 const multer = require("multer");
+const { convertDate, errorlog } = require('../routes/Errorlog');
 
 // Store PDF in memory → buffer
 const storage = multer.memoryStorage();
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 20 * 1024 * 1024 } // max 20MB
+  limits: { fileSize: 20 * 1024 * 1024 } 
 });
 
 // ✅ API to get all images for a given user and vehicle number
-router.get('/get-images/:user/:vehicleno', (req, res) => {
+router.get('/get-images/:user/:vehicleno', allowRoles(1,2), (req, res) => {
   const { user, vehicleno } = req.params;
   const folderPath = path.join(__dirname, '../public/downloads/Gallery/policy/user','TN57AB1234');
 
@@ -35,7 +36,7 @@ router.get('/get-images/:user/:vehicleno', (req, res) => {
   });
 });
 
-router.post('/policypreparegrid', async (req, res) => {
+router.post('/policypreparegrid', allowRoles(1,2), async (req, res) => {
   try {
     // 🧠 Step 1: Prepare payload
     const UserId = req.session.AgntDtl.UserId
@@ -57,6 +58,7 @@ router.post('/policypreparegrid', async (req, res) => {
 
   } catch (error) {
     console.error('❌ Error in /policypreparegrid:', error);
+        errorlog(error, req);
     res.status(500).json({
       success: false,
       error: error.message || "Internal Server Error"
@@ -64,7 +66,7 @@ router.post('/policypreparegrid', async (req, res) => {
   }
 });
 
-router.post('/prepareupdate', async (req, res) => {
+router.post('/prepareupdate',allowRoles(1,2), async (req, res) => {
   try {
     const data = req.body.data || [];
     // console.log("Parsed data array:", data);
@@ -89,11 +91,12 @@ router.post('/prepareupdate', async (req, res) => {
     });
   } catch (error) {
     console.error('Error:', error.message);
+        errorlog(error, req);
     res.status(500).json({ success: false, error: error.message });
   }
 });
 
-router.post("/preparesave", upload.single("pdfFile"), async (req, res) => {
+router.post("/preparesave", allowRoles(1,2), upload.single("pdfFile"), async (req, res) => {
   try {
     const UserId = req.session.AgntDtl.UserId;
 
@@ -106,7 +109,7 @@ router.post("/preparesave", upload.single("pdfFile"), async (req, res) => {
       transactionid, merchentorderid, regdate, chasisno, engineno, kycheader,
       pan, dob, support_header, support_description, od, tp, netpremium,
       grosspremium, company, policyno, ncb, policystartdate, policyenddate,
-      remarks, policyid
+      remarks, policyid,difference_amount
     ] = data;
 
     // Create form-data for sending to internal API
@@ -130,6 +133,7 @@ router.post("/preparesave", upload.single("pdfFile"), async (req, res) => {
     form.append("remarks", remarks);
     form.append("createby", UserId);
     form.append("mobile", mobile);
+    form.append("difference_amount", difference_amount);
     // Append PDF file (binary)
     if (pdfFile) {
     form.append("pdfFile", pdfFile.buffer, {
@@ -137,6 +141,27 @@ router.post("/preparesave", upload.single("pdfFile"), async (req, res) => {
         contentType: pdfFile.mimetype
     });
 }
+
+console.log({
+  policyid,
+  amount,
+  transactionid,
+  merchentorderid,
+  od,
+  tp,
+  netpremium,
+  grosspremium,
+  company,
+  policyno,
+  ncb,
+  policystartdate,
+  policyenddate,
+  remarks,
+  createby: UserId,
+  mobile,
+  difference_amount
+});
+
 
 const result = await apiCaller.apicallerLivePort_formdata(
     "Policy_renewal/operation_policy_save",
@@ -150,18 +175,18 @@ const result = await apiCaller.apicallerLivePort_formdata(
     // 1️⃣ Save PDF locally (Gallery/Policy_pdf/policyid/policyid.pdf)
     // -----------------------------------------------------------
 
-    if (pdfFile) {
-      const folderPath = path.join(__dirname, "..", "Gallery", "Policy_pdf", result.data.insertedId.toString());
-      const filePath = path.join(folderPath, `${result.data.insertedId}.pdf`);
+    // if (pdfFile) {
+    //   const folderPath = path.join(__dirname, "..", "Gallery", "Policy_pdf", result.data.insertedId.toString());
+    //   const filePath = path.join(folderPath, `${result.data.insertedId}.pdf`);
 
-      // Create folder if it doesn't exist
-      if (!fs.existsSync(folderPath)) {
-        fs.mkdirSync(folderPath, { recursive: true });
-      }
+    //   // Create folder if it doesn't exist
+    //   if (!fs.existsSync(folderPath)) {
+    //     fs.mkdirSync(folderPath, { recursive: true });
+    //   }
 
-      // Save PDF
-      fs.writeFileSync(filePath, pdfFile.buffer);
-    }
+    //   // Save PDF
+    //   fs.writeFileSync(filePath, pdfFile.buffer);
+    // }
 
     return res.json({
       success: result.data.success,
@@ -171,12 +196,13 @@ const result = await apiCaller.apicallerLivePort_formdata(
 
   } catch (error) {
     console.error("Error:", error);
+        errorlog(error, req);
     return res.status(500).json({ success: false, error: error.message });
   }
 });
 
 
-router.post('/prepare_pending', async (req, res) => {
+router.post('/prepare_pending',allowRoles(1,2), async (req, res) => {
   try {
      const UserId = req.session.AgntDtl.UserId
     const data = req.body.data || [];
@@ -202,8 +228,34 @@ router.post('/prepare_pending', async (req, res) => {
     });
   } catch (error) {
     console.error('Error:', error.message);
+      errorlog(error, req);
     res.status(500).json({ success: false, error: error.message });
   }
 });
+
+router.get('/Get_companyname', allowRoles(1), async (req, res) => {
+  try {
+    const result = await apiCaller.apicallerGet('Policy_renewal/policy_company_list');
+
+    return res.json({
+      success: result.success,
+      message: result.message,
+      count: result.count,
+      data: result.data
+    });
+
+  } catch (error) {
+    console.error('Error:', error.message);
+  errorlog(error, req);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message
+    });
+  }
+});
+
+
+
 
 module.exports = router;

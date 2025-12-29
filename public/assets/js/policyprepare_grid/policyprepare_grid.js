@@ -1,11 +1,28 @@
 $(document).ready(function () {
 Gridload();
-$(document).on('click', '#save_btn', Btn_save);
-$(document).on('click', '#back_btn', btn_back);
-$(document).on('click', '#refreshBtn', refreshBtn);
+load();
+$(document).on('click', '#save_btn', () => checkSession(Btn_save));
+$(document).on('click', '#back_btn', () => checkSession(btn_back));
+$(document).on('click', '#refreshBtn',() => checkSession(refreshBtn))
 
 document.getElementById("lbl_pdf_base_string").textContent="";
 });
+// $("#tlamount").val(1000);
+function calculateDifference() {
+        let gross = parseFloat($("#txt_grosspremium").val()) || 0; // amount to subtract
+        let tla = parseFloat($("#tlamount").val()) || 0;           // main amount
+
+        let diff = tla - gross; // correct formula
+
+        $("#difference_amount").val(diff.toFixed(0));
+
+       if (gross == 0) {
+          $("#difference_amount").val("0");
+       }
+
+    }
+
+    $("#txt_grosspremium, #tlamount").on("keyup change", calculateDifference);
 
 
 var today = new Date();
@@ -176,19 +193,20 @@ function Gridload() {
                 "#dynamicTable",
                 response.fresh,
                 [
-            { title: "S.No.", formatter: "rownum",  hozAlign: "center" },
-            { title: "Payment Date", field: "payment_datee" },
-            { title: "Customername", field: "customername"},
-            { title: "Mobile", field: "mobile" },
-            { title: "Vehicleno", field: "vehicleno" },
-            { title: "Make", field: "make" },
-            { title: "Model", field: "model" },
-            { title: "Amount", field: "amount" },
-            { title: "Kyc Status", field: "kyc_status" },
+            { title: "S.No.", formatter: "rownum",  widthGrow: 1, hozAlign: "center" },
+            { title: "Payment Date", field: "payment_datee",  widthGrow: 1 },
+            { title: "Customername", field: "customername",  width: '12px'},
+            { title: "Mobile", field: "mobile",  widthGrow: 1 },
+            { title: "Vehicleno", field: "vehicleno",  widthGrow: 1 },
+            { title: "Make", field: "make",  widthGrow: 1 },
+            { title: "Model", field: "model",  widthGrow: 1 },
+            { title: "Amount", field: "amount", widthGrow: 1 },
+            { title: "Kyc Status", field: "kyc_status", widthGrow: 1 },
             // { title: "idv", field: "idv" , width: 80},
-            { title: "Transactionid", field: "transactionid" },
+            { title: "Transactionid", field: "transactionid",  widthGrow: 1, visible: false  },
             {
               title: "Action",
+              widthGrow: 1,
               formatter: function (cell) {
                 const userid = cell.getRow().getData().id;
                 return `<u style="color:blue; cursor:pointer;" onclick="prepare_pending(${userid})"><i class="fa-solid fa-folder-open"></i></u>`;
@@ -204,19 +222,20 @@ function Gridload() {
                 "#gridTable2",
                 response.waiting,
                 [
-            { title: "S.No.", formatter: "rownum",  hozAlign: "center" },
-            { title: "Payment Date", field: "payment_datee",},
-            { title: "Customername", field: "customername" },
-            { title: "Mobile", field: "mobile" },
-            { title: "Vehicleno", field: "vehicleno" },
-            { title: "Make", field: "make" },
-            { title: "Model", field: "model" },
-            { title: "Amount", field: "amount" },
-            { title: "Kyc Status", field: "kyc_status" },
+            { title: "S.No.", formatter: "rownum",  widthGrow: 1,  hozAlign: "center" },
+            { title: "Payment Date", field: "payment_datee", widthGrow: 1},
+            { title: "Customername", field: "customername",  width: '12px'},
+            { title: "Mobile", field: "mobile",  widthGrow: 1 },
+            { title: "Vehicleno", field: "vehicleno",  widthGrow: 1 },
+            { title: "Make", field: "make",  widthGrow: 1 },
+            { title: "Model", field: "model",  widthGrow: 1 },
+            { title: "Amount", field: "amount",  widthGrow: 1 },
+            { title: "Kyc Status", field: "kyc_status",  widthGrow: 1 },
             // { title: "idv", field: "idv" },
-            { title: "Transactionid", field: "transactionid" },
+            { title: "Transactionid", field: "transactionid",  widthGrow: 1, visible: false },
             {
               title: "Action",
+               widthGrow: 1,
               formatter: function (cell) {
                 const userid = cell.getRow().getData().id;
                 return `<u style="color:blue; cursor:pointer;" onclick="update(${userid})"><i class="fa-solid fa-folder-open"></i></u>`;
@@ -278,6 +297,8 @@ function update(id) {
         console.log("User Data:", user);
         $("#mainPage").addClass("hidden");
         $("#secoundPage").removeClass("hidden");
+        $("#Grid_table_id").addClass("hidden");
+
         $("#tlcustomerName").val(user.customername || "");
         $("#vehicleNo").val(user.vehicleno || "");
         $("#tlpayment_datee").val(user.payment_datee || "");
@@ -333,6 +354,9 @@ function Btn_save() {
       formData.append("pdfFile", pdfFile);
     }
 
+      const difference_amount = $('#difference_amount').val();
+      formData.append("data[]", difference_amount);
+
     $.ajax({
       type: "POST",
       url: "/preparesave",
@@ -347,14 +371,15 @@ function Btn_save() {
         $("#cover").hide();
         if (response.success) {
           showmobilenumber("Success!", response.message);
-          $("#savepage").addClass("hidden");
+          $("#secoundPage").addClass("hidden");
           $("#mainPage").removeClass("hidden");
+          $("#Grid_table_id").removeClass("hidden");
           $("#lblinsertedId").text(response.insertedId);
           clearall(".tl_clear");
       $("#ddl_ncb").val("0");
       $("#ddl_paymentMode").val("0");
-      $("#secoundPage").addClass("hidden");
-      $("#mainPage").removeClass("hidden"); 
+      // $("#secoundPage").addClass("hidden");
+      // $("#mainPage").removeClass("hidden"); 
       Gridload();
         }
       },
@@ -370,6 +395,10 @@ function Btn_save() {
 function btn_back() {
   $("#secoundPage").addClass("hidden");
   $("#mainPage").removeClass("hidden"); 
+  $("#Grid_table_id").addClass("hidden");
+
+  $("#Grid_table_id").removeClass("hidden");
+  $("#grid_tow").removeClass("hidden");
   Gridload();
 }
 
@@ -394,6 +423,9 @@ function prepare_pending(id) {
       $("#cover").show();
     },
     success: function (response) {
+       $("#grid_one").addClass("hidden");
+        $("#grid_tow").addClass("hidden");
+
       if (response.success == true) {    
         update(id);
       } else if (response.success == false) {
@@ -611,3 +643,27 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 // ___________________________________image script end_________________________
+
+function load() {
+    $.ajax({
+    type: "Get",
+    url: "/Get_companyname",
+    traditional: true,
+    beforeSend: function () {
+      $("#cover").show();
+    },
+    success: function (response) {
+
+       const ddlonstatus = document.getElementById('ddl_Company');
+        ddlonstatus.innerHTML = '<option value="0">Select</option>';
+
+        (response.data || []).forEach(branch => {
+          const opt = document.createElement('option');
+          opt.value = branch.id;
+          opt.textContent = branch.companyname;
+          ddlonstatus.appendChild(opt);
+        });
+        
+      },
+      });
+} 

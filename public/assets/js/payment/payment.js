@@ -2,12 +2,17 @@
 $(document).ready(function () { 
    $(document).on('click', '#btn_sticky_renewal', btn_sticky_renewal);
     $(document).on('click', '#save_btn', save_btn);
+      $(document).on('click', '#btn_sticky_Not_Interested', btn_sticky_Not_Interested);
     
          const urlParams = new URLSearchParams(window.location.search);
          const paymentid = urlParams.get('txnid');
          const excelid = urlParams.get('excelid');
         $('#lbltnxid').text(paymentid);
         $('#lblexcelid').text(excelid);
+
+         document.getElementById('logo_id').addEventListener('click', function () {
+    window.location.href = 'https://www.jubiliant.co.in/';
+  });
 });
 
   const checkedvalue = $('#oneYear').val();
@@ -219,3 +224,50 @@ function save_btn() {
     }
   });
 }
+
+
+document.addEventListener('click', function (e) {
+  const btn = e.target.closest('.toggleBtn');
+  if (!btn) return;
+
+  const index = btn.dataset.index;
+  const text = document.getElementById(`vehicleText-${index}`);
+
+  if (text.classList.contains('max-h-[1.1rem]')) {
+    text.classList.remove('max-h-[1.1rem]');
+    btn.querySelector('span').innerText = 'Less';
+  } else {
+    text.classList.add('max-h-[1.1rem]');
+    btn.querySelector('span').innerText = 'More';
+  }
+});
+
+
+function btn_sticky_Not_Interested () {
+   const data = [
+    $('#lbltnxid').text().trim(),
+  ];
+
+  $.ajax({
+    url: '/not_interested',
+    type: 'POST',
+    contentType: 'application/json', // ✅ send JSON properly
+    data: JSON.stringify({ data: data }),
+       beforeSend: function () {
+            $("#cover").show();
+        },
+    success: function (response) {
+      console.log('Server Response:', response);
+
+      if (response.success == true) {
+       showmobilenumber('Success!', response.message)
+      
+      } else  {
+         showmobilenumber('Error!', response.message)
+      }
+    },
+    error: function (error) {
+      console.error('Error:', error);
+    }
+  });
+} 

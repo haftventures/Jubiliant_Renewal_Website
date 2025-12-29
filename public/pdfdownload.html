@@ -17,7 +17,7 @@ if (!policyId) {
     document.body.innerHTML = "<h2>❌ Invalid Request: Policy ID Missing</h2>";
 } else {
     // Direct PDF path on your domain
-   const pdfUrl = `https://pa1innovsource.com/Gallery/Policy_pdf/${policyId}/${policyId}.pdf`;
+   const pdfUrl = `https://renewalapi.jipolicy.com/Gallery/Policy_pdf/${policyId}/${policyId}.pdf`;
    setTimeout(() => {
         window.open(pdfUrl, "_blank");
     }, 500);

@@ -3,7 +3,6 @@
 <div class="flex justify-center">
 <div id="mainPage" class="w-[98%] bg-white shadow-2xl p-2 mt-2 rounded-2xl transition duration-300 justify-self-center" style="box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35);">
 
-    <!-- Title -->
     <div class="flex items-center justify-center mb-1">
         <h2 class="text-gray-900">
             Policy Details
@@ -45,6 +44,13 @@
             </button>
         </div>
 
+       <div class="flex w-full sm:w-auto">
+            <button id="AddnewBtn"
+                class="font-semibold px-6 py-1 primary-button w-full sm:w-auto">
+            Addnew +
+            </button>
+        </div>
+
         <div >
         <a href="/mass_update_sms"
            class="text-sm font-medium text-indigo-600 hover:text-indigo-800 underline decoration-2 underline-offset-4">
@@ -55,11 +61,13 @@
     </div>
 
     <!-- Total Count -->
-    <div class="mt-4 text-center">
+       <div class="text-center  flex gap-6 text-[14px] justify-center">
+      <div class=" text-center bg-white p-2 rounded-lg shadow-sm border border-gray-200 h-[40px]">
         <span class="text-gray-800">Total Count:</span>
         <label id="lbltotal_count" class="font-bold">0</label>
-    </div>
-
+      </div>
+      </div>
+</div>
 </div>
 </div>
 
@@ -67,9 +75,9 @@
  <!-- Tabulator Grid -->
   
    <!-- <div class="p-2"> -->
-    <div class="mt-3 w-[98%] justify-self-center">
-       <div id="dynamicTable" class="overflow-x-auto mt-3"></div>
-    </div>
+    <div class="mt-3 w-[98%] justify-self-center hidden" id="table_Container">
+       <div id="dynamicTable" class="overflow-x-auto mt-3 "></div>
+  
   
 
    <div class="flex w-full flex justify-center mb-3" id="div_send" style="display:none;">
@@ -78,7 +86,200 @@
                 Send
             </button>
         </div>
+  </div>
 
+<!-- Save Page -->
+<div id="savepage" class="flex hidden flip-container justify-center Box_binfo2 " >
+  <div class="w-full flipper max-w-5xl" style="margin-top: -20px;">
+    <div>
+     
+      <section class="container mx-auto rounded-xl box1 flex justify-center ">
+        <div class="w-full bg-white py-1 p-3 rounded-lg shadow-[0_0_15px_rgba(255,140,66,0.4)]">
+          <div class="flex items-center mb-6">
+            <h1 class="flex-1 text-center text-md font-semibold text-gray-800 mt-2">Policy Details</h1>
+          </div>
+
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+  <!-- Name -->
+  <div>
+    <label class="block mb-2 text-sm font-medium">Name <span class="text-red-600">*</span></label>
+    <input type="text" id="name" maxlength="60" tabindex="1" data-placeholder="Name"
+      class="w-full px-3 py-1 pd_txt_all pd_txt_clear pd_txt_chk border rounded border-gray-300 focus:ring-1 focus:ring-orange-500 bg-[#f9fafb] focus:outline-none"
+      placeholder="Enter Name" />
+  </div>
+
+  
+  
+  <!-- Address <span class="text-red-600">*</span>-->
+  <div>
+      <label class="block mb-2 text-sm font-medium">Address <span class="text-red-600">*</span></label>
+      <textarea id="address" rows="3" maxlength="500" tabindex="2" data-placeholder="Address"
+      class="w-full px-3 py-1 border pd_txt_all pd_txt_clear pd_txt_chk rounded border-gray-300 focus:ring-1 focus:ring-orange-500 bg-[#f9fafb] focus:outline-none resize-none"
+      placeholder="Enter Address"></textarea>
+    </div>
+    
+    <div>
+      <label class="block mb-2 text-sm font-medium">
+        Mobile No <span class="text-red-600">*</span>
+      </label>
+      <input
+        type="text"
+        data-placeholder="Mobile No"
+        id="mobile"
+        tabindex="3"
+        maxlength="10"
+        placeholder="9876543210"
+        onkeypress="return isNumberKey(event)"
+        class="w-full mobileNo px-3 py-1 border pd_txt_all pd_txt_clear pd_txt_chk rounded border-gray-300 focus:ring-1 focus:ring-orange-500 bg-[#f9fafb] focus:outline-none"
+      />
+    </div>
+
+
+     <!-- Vehicle No -->
+  <div>
+    <label class="block mb-2 text-sm font-medium">Vehicle No <span class="text-red-600">*</span></label>
+    <input type="text" id="vehicleNo" maxlength="10" tabindex="11" data-placeholder="Vehicle No"
+      class="w-full px-3 py-1 border vehicleNo pd_txt_all pd_txt_clear pd_txt_chk uppercase rounded border-gray-300 focus:ring-1 focus:ring-orange-500 bg-[#f9fafb] focus:outline-none"
+      placeholder="TN09AB1234" />
+  </div>
+
+  <!-- <div>
+  <label class="block mb-2 text-sm font-medium">Vehicle No <span class="text-red-600">*</span></label>
+
+  <div class="flex gap-2">
+    <input type="text" id="veh1" maxlength="2" placeholder="TN" tabindex="4"  onkeypress="return restrictNonAlpha(event)"
+      class="veh-input w-[25%] text-center uppercase px-2 py-1 border rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:outline-none" />
+
+    <input type="text" id="veh2" maxlength="2" placeholder="09" tabindex="5"   onkeypress="return isNumberKey(event)"
+      class="veh-input w-[25%] text-center px-2 py-1 border rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:outline-none" />
+
+    <input type="text" id="veh3" maxlength="2" placeholder="AB" tabindex="6"   onkeypress="return restrictNonAlpha(event)"
+      class="veh-input w-[25%] text-center uppercase px-2 py-1 border rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:outline-none" />
+
+    <input type="text" id="veh4" maxlength="4" placeholder="1234" tabindex="7"   onkeypress="return isNumberKey(event)"
+      class="veh-input  w-full lg:w-[21%] sm-[189px] text-center px-2 py-1 border rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:outline-none" />
+  </div>
+</div> -->
+
+
+  <!-- Make -->
+  <div>
+    <label class="block mb-2 text-sm font-medium">Make <span class="text-red-600">*</span></label>
+    <input type="text" id="make" maxlength="130" tabindex="12" data-placeholder="Make"
+      class="w-full px-3 py-1 border pd_txt_all pd_txt_clear pd_txt_chk rounded border-gray-300 focus:ring-1 focus:ring-orange-500 bg-[#f9fafb] focus:outline-none"
+      placeholder="Honda" />
+  </div>
+
+  <!-- Model -->
+  <div>
+    <label class="block mb-2 text-sm font-medium">Model <span class="text-red-600">*</span></label>
+    <input type="text" id="model" maxlength="30" tabindex="13" data-placeholder="Model"
+      class="w-full px-3 py-1 border pd_txt_all pd_txt_clear pd_txt_chk rounded border-gray-300 focus:ring-1 focus:ring-orange-500 bg-[#f9fafb] focus:outline-none"
+      placeholder="City 100cc" />
+  </div>
+
+  <!-- Registration Date -->
+  <div>
+    <label class="block mb-2 text-sm font-medium">Reg Date <span class="text-red-600">*</span></label>
+    <input type="text" id="regDate" tabindex="14" placeholder="DD-MM-YYYY" data-placeholder="Reg Date"
+      class="w-full px-3 py-1 border pd_txt_all pd_txt_clear pd_txt_chk rounded border-gray-300 focus:ring-1 focus:ring-orange-500 bg-[#f9fafb] focus:outline-none" readonly />
+  </div>
+
+  <!-- Engine No -->
+  <div>
+    <label class="block mb-2 text-sm font-medium">Engine No <span class="text-red-600">*</span></label>
+    <input type="text" id="engineNo" maxlength="40" tabindex="15" data-placeholder="Engine No"
+      class="w-full px-3 py-1 border pd_txt_all pd_txt_clear pd_txt_chk rounded border-gray-300 focus:ring-1 focus:ring-orange-500 bg-[#f9fafb] focus:outline-none"
+      placeholder="ENG123456" />
+  </div>
+
+  
+  <!-- Chassis No -->
+  <div>
+      <label class="block mb-2 text-sm font-medium">Chassis No <span class="text-red-600">*</span></label>
+      <input type="text" id="chassisNo" maxlength="40" tabindex="16" data-placeholder="Chassis No"
+      class="w-full px-3 py-1 border pd_txt_all pd_txt_clear pd_txt_chk rounded border-gray-300 focus:ring-1 focus:ring-orange-500 bg-[#f9fafb] focus:outline-none"
+      placeholder="CHS987654" />
+    </div>
+    
+    <!-- Policy End Date -->
+  
+    <div>
+      <label class="block mb-2 text-sm font-medium">Policy End Date <span class="text-red-600">*</span></label>
+      <input type="text" id="policyEndDate" tabindex="17" placeholder="DD-MM-YYYY" data-placeholder="Policy End Date"
+        class="w-full px-3 py-1 border pd_txt_all pd_txt_clear pd_txt_chk rounded border-gray-300 focus:ring-1 focus:ring-orange-500 bg-[#f9fafb] focus:outline-none" readonly/>
+    </div>
+    
+
+    <!-- One Year -->
+  <div>
+    <label class="block mb-2 text-sm font-medium">One Year<span class="text-red-600">*</span></label>
+    <input type="text" id="oneYear" maxlength="7" tabindex="18" data-placeholder="One Year" onkeypress="return isNumberKey(event)"
+      class="w-full px-3 py-1 border pd_txt_all pd_txt_clear pd_txt_chk rounded border-gray-300 focus:ring-1 focus:ring-orange-500 bg-[#f9fafb] focus:outline-none"
+      placeholder="Amount" />
+  </div>
+
+  <!-- Two Year -->
+  <div>
+    <label class="block mb-2 text-sm font-medium">Two Year <span class="text-red-600">*</span></label>
+    <input type="text" id="twoYear" maxlength="7" tabindex="19" data-placeholder="Two Year" onkeypress="return isNumberKey(event)"
+      class="w-full px-3 py-1 border pd_txt_all pd_txt_clear pd_txt_chk rounded border-gray-300 focus:ring-1 focus:ring-orange-500 bg-[#f9fafb] focus:outline-none"
+      placeholder="Amount" />
+  </div>
+
+</div>
+
+<!-- Three Year -->
+<div class="col-span-2 flex justify-start lg:justify-center mt-5">
+  <div>
+    <label class="block mb-2 text-sm  font-medium">Three Year <span class="text-red-600">*</span></label>
+    <input
+      type="text"
+      id="threeYear"
+      onkeypress="return isNumberKey(event)"
+      data-placeholder="Three Year"
+      tabindex="20"
+      maxlength="7"
+      class="w-[163%] sm:w-96 px-3 py-1 pd_txt_all pd_txt_clear pd_txt_chk border rounded border-gray-300 focus:ring-1 focus:ring-orange-500 bg-[#f9fafb] focus:outline-none"
+      placeholder="Amount"
+    />
+  </div>
+</div>
+       
+  <div class="flex justify-center mt-9 mb-3 gap-x-4">
+  <button
+    id="Btn_save"
+    type="button"
+    tabindex="21"
+    class="w-full md:max-w-96 primary-button px-6 py-2 rounded "
+  >
+    Save
+  </button>
+
+  <button
+    id="Btn_back"
+    type="button"
+    tabindex="22"
+    class="w-full md:max-w-96 secondary-button px-6 py-2 rounded"
+  >
+    Back
+  </button>
+</div>
+
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+        
 
          <!--Popup modal-->
  <div style="z-index: 100000;" id="hs-modal" class="hs-overlay hidden fixed inset-0 z-50 bg-black bg-opacity-70 backdrop-blur-[12px] flex items-center justify-center" role="dialog" aria-modal="true">

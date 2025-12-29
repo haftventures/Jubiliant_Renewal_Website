@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const apiCaller = require('../apicaller');
 const axios = require('axios');
-
+const { convertDate, errorlog } = require('../routes/Errorlog');
 // async function paymentHandler(req, res) {
 //   try {
 //     // console.log("=% blazepaymentHandler HIT");
@@ -136,12 +136,14 @@ async function paymentHandler(req, res) {
      
     // return res.redirect("/underconstruction.html");
 } else if (message == "false") {
-
-   res.redirect("/paymentdone.html");
+   const renewal = list2[0];
+   res.redirect(`/paymentdone.html?txnid=${encodeURIComponent(txnid)}&excelid=${encodeURIComponent(renewal.id)}`);
 }
-  } catch (err) {
-    console.error("L Error in paymentHandler:", err);
-    res.status(500).send("Internal Server Error");
+  } catch (error) {
+    console.error("L Error in paymentHandler:", error);
+    // res.status(500).send("Internal Server Error");
+    errorlog(error, req);
+     res.redirect(`/linkexpired.html`);
   }
 }
 
@@ -180,11 +182,12 @@ router.post('/renewalsubmit', async (req, res) => {
     //  Return whole result
     return res.json({ data: result });
 
-  } catch (err) {
-    console.error('save_reports error:', err);
+  } catch (error) {
+    console.error('save_reports error:', error);
+    errorlog(error, req);
     return res.status(500).json({
       status: 500,
-      message: `Internal server error: ${err.message}`
+      message: `Internal server error: ${error.message}`
     });
   }
 });
@@ -221,14 +224,46 @@ router.post('/payment_support', async (req, res) => {
     //  Return whole result
     return res.json({ success: result.success, message: result.message, insertedid: result.insertedid });
 
-  } catch (err) {
-    console.error('save_reports error:', err);
+  } catch (error) {
+    console.error('save_reports error:', error);
+    errorlog(error, req);
     return res.status(500).json({
       status: 500,
-      message: `Internal server error: ${err.message}`
+      message: `Internal server error: ${error.message}`
     });
   }
 });
+
+
+
+router.post('/not_interested', async (req, res) => {
+  try {
+  
+    const data = req.body.data || [];
+   
+    const [txnid] = data;
+
+    const payload = {
+      txnid: txnid, 
+    };
+
+    const result = await apiCaller.apicallerLivePort(
+      'Policy_renewal/not_interested',
+      payload
+    );
+
+    return res.json({ success: result.success, message: result.message});
+
+  } catch (error) {
+    console.error('save_reports error:', error);
+    errorlog(error, req);
+    return res.status(500).json({
+      status: 500,
+      message: `Internal server error: ${error.message}`
+    });
+  }
+});
+
 
 
 

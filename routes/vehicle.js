@@ -2,9 +2,11 @@
 const express = require('express');
 const router = express.Router();
 const apiCaller = require('../apicaller');
+const allowRoles = require('../routes/Middleware');
+const { convertDate, errorlog } = require('../routes/Errorlog');
 
 // POST /api/leads/save
-router.post('/vehiclegrid', async (req, res) => {
+router.post('/vehiclegrid', allowRoles(1), async (req, res) => {
   try {
     const data = req.body.data || [];
     // console.log("Parsed data array:", data);
@@ -29,12 +31,13 @@ router.post('/vehiclegrid', async (req, res) => {
     });
   } catch (error) {
     console.error('Error:', error.message);
+         errorlog(error, req);
     res.status(500).json({ success: false, error: error.message });
   }
 });
 
 
-router.post('/Datasave', async (req, res) => {
+router.post('/Datasave', allowRoles(1), async (req, res) => {
   try {
     const data = req.body.data || [];
     const UserId = req.session.AgntDtl.UserId
@@ -65,6 +68,7 @@ router.post('/Datasave', async (req, res) => {
     });
   } catch (error) {
     console.error('Error:', error.message);
+         errorlog(error, req);
     res.status(500).json({ success: false, error: error.message });
   }
 });

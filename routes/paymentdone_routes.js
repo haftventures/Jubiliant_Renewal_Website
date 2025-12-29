@@ -3,9 +3,10 @@ const express = require('express');
 const router = express.Router();
 const apiCaller = require('../apicaller');
 const axios = require('axios');
+const allowRoles = require('../routes/Middleware');
+const { convertDate, errorlog } = require('../routes/Errorlog');
 
-
-router.post('/paymentdone_support', async (req, res) => {
+router.post('/paymentdone_support', allowRoles(1), async (req, res) => {
   try {
     const data = req.body.data || [];
     // console.log('Received data:', data);
@@ -21,6 +22,7 @@ router.post('/paymentdone_support', async (req, res) => {
     res.json({ success: result.success, message: result.message });
   } catch (err) {
     console.error('successtxnidupdate error:', err);
+         errorlog(error, req);
     res.status(500).json({
       success: false,
       message: `Internal server error: ${err.message}`,

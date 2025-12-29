@@ -1,0 +1,143 @@
+
+
+
+<div id="mainPage" class="w-[98%] bg-white shadow-2xl p-2 mt-2 rounded-2xl transition duration-300 justify-self-center" style="box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35);">
+  
+
+    <div class="flex items-center justify-center mb-1">
+        <h2 class="text-gray-900">
+            <!-- <svg class="w-6 h-6 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg> -->
+           Make Qc Stage 2
+        </h2>
+    </div>
+
+  
+
+  <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-end justify-self-center gap-4 mt-3 mb-2">
+   
+
+         <div class="flex flex-col w-full sm:w-auto">
+              <label for="status" class="text-xs font-semibold text-gray-600 mb-1">
+              Qc One Status 
+              </label>
+              <select id="status_pr" tabindex="1"  data-placeholder="Status"
+                class="border status_pr border-gray-300 bg-gray-50 rounded-lg px-3 py-[6px] text-gray-700 w-full focus:ring-1 focus:ring-orange-500 focus:border-orange-500 cursor-pointer focus:outline-none">
+               
+              </select>
+            </div>
+
+  
+    <div class="flex w-full sm:w-auto">
+      <button
+        id="viewBtn_pr" tabindex="4"
+        class="font-semibold px-6 py-1 primary-button w-full sm:w-auto" >
+        View
+      </button>
+    </div>
+    <div class="flex w-full sm:w-auto" id="div_mass_btn" style="display: none;">
+      <button
+        id="btnmass" tabindex="4"
+        class="font-semibold px-6 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded" >
+        Mass Update         
+      </button>           
+    </div>
+  </div>
+ <div class="mt-4 flex justify-between items-center">
+    <!-- Left: Total Count -->
+    <div class="text-left">
+        <span class="text-gray-800">Showing Records:</span>
+        <label id="lbltotal_counts" class="font-bold">0</label>
+    </div>
+
+    <!-- Right: Pending Records -->
+    <div class="text-right">
+        <span class="text-gray-800" id="span_records"></span>
+        <label id="lbltotal_count" class="font-bold">0</label>
+    </div>
+</div>
+
+ 
+</div>
+
+ <!-- Tabulator Grid -->
+ <div class="p-2 mt-6 w-[98%] justify-self-center" id="P_rgrid">
+
+  <div id="dynamicTable" class="overflow-x-auto"></div>
+</div>
+<div id="cardContainer" class="grid grid-cols-1 gap-4"></div>
+
+
+ <!--Popup modal-->
+ <div style="z-index: 100000;" id="hs-modal" class="hs-overlay hidden fixed inset-0 z-50 bg-black bg-opacity-70 backdrop-blur-[12px] flex items-center justify-center" role="dialog" aria-modal="true">
+  <div class="bg-white rounded-xl w-full max-w-md p-6 shadow-lg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" >
+    <!-- Header -->
+    <div class="mb-4">
+      <h3 id="modalHeader" class="text-xl text-green-500 font-bold border-b border-gray-200 text-gray-800"></h3>
+     
+      
+    </div>
+    <!-- Message -->
+    <div class="mb-4">
+      <p id="modalMessage" class="text-gray-700 text-lg"></p>
+    </div>
+    <!-- OK Button -->
+    <div class="text-right">
+      <button type="button" id="modalClose" class="py-2 px-4 text-sm font-medium rounded bg-green-600 text-white hover:bg-green-700">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- QC Confirm Modal -->
+<div
+  id="hs-modal_qc"
+  class="hs-overlay hidden fixed inset-0 z-50 bg-black bg-opacity-70 backdrop-blur-[12px] flex items-center justify-center"
+  role="dialog"
+  aria-modal="true">
+
+  <div class="bg-white rounded-xl w-full max-w-md p-6 shadow-lg">
+    
+    <!-- Header -->
+    <div class="mb-4">
+      <h3
+        id="modalHeader_qc"
+        class="text-xl font-bold border-b border-gray-200 text-gray-800">
+      </h3>
+    </div>
+
+    <!-- Message -->
+    <div class="mb-4">
+      <p
+        id="modalMessage_qc"
+        class="text-gray-700 text-lg">
+      </p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="text-right space-x-2">
+      <button
+        type="button"
+        id="modalNo_qc"
+        name="modalNo_qc"
+        class="py-2 px-4 text-sm font-medium rounded bg-gray-400 text-white hover:bg-gray-500">
+        No
+      </button>
+
+      <button
+        type="button"
+        id="modalYes_qc"
+        name="modalYes_qc"
+        class="py-2 px-4 text-sm font-medium rounded bg-green-600 text-white hover:bg-green-700">
+        Yes
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+<script src="/assets/js/globalGridTheme.js"></script>
+<script src="/assets/js/Make_qc_verified/Make_qc_verified.js"></script>
+<script src="/assets/js/common_scripts.js"></script>

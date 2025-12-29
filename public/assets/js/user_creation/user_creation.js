@@ -1,7 +1,9 @@
 $(document).ready(function () {
-$(document).on('click','#Btn_back', Btn_back);
-$(document).on('click','#addNewBtn', addNewBtn); 
-$(document).on('click','#Btn_save', Btn_save);   
+$(document).on('click','#viewBtn', () => checkSession(viewBtn));  
+$(document).on('click','#Btn_back', () => checkSession(Btn_back));
+$(document).on('click','#addNewBtn', () => checkSession(addNewBtn)); 
+$(document).on('click','#Btn_save', () => checkSession(Btn_save));   
+
 $("#ddlonstatus").val("1");
 load();
 });
@@ -180,8 +182,8 @@ function viewBtn() {
       console.log("Response:", response);
       $("#cover").hide();
       // $("#search_box").removeClass("hidden");
-
       if (response.success == true) {
+        $("#lbltotal_count").text(response.Count);
        if (window.currentTabulator) {
          window.currentTabulator.destroy();
         }
@@ -192,17 +194,17 @@ function viewBtn() {
         "#dynamicTable",
         response.data,
         [
-    { title: "S.No.", formatter: "rownum", width: 130, hozAlign: "center" },
+    { title: "S.No.", formatter: "rownum",  widthGrow: 1, hozAlign: "center" },
     // { title: "userid", field: "userid" },
-    { title: "Empcode", field: "empcode", width: 190  },
-    { title: "Name", field: "name", width: 250  },
-    { title: "Mobileno", field: "mobileno",width: 160 },
-    { title: "Username", field: "username",width: 180 },
-    { title: "Password", field: "password" ,width: 180  },
-    { title: "Rolename", field: "rolename" ,width: 190  },
+    { title: "Empcode", field: "empcode",  widthGrow: 1  },
+    { title: "Name", field: "name",  widthGrow: 1  },
+    { title: "Mobileno", field: "mobileno", widthGrow: 1 },
+    { title: "Username", field: "username", widthGrow: 1},
+    { title: "Password", field: "password" , widthGrow: 1  },
+    { title: "Rolename", field: "rolename" , widthGrow: 1},
     {
      title: "Action",
-     width: 320,
+     width: 105,
      formatter: function (cell) {
      const userid = cell.getRow().getData().userid;
     return `<u style="color:blue; cursor:pointer;" onclick="usercreation_update(${userid})">View</u>`;
@@ -316,6 +318,7 @@ function addNewBtn() {
         });
          $("#empId").val(response.EmpCode);
          $("#mainPage").addClass("hidden");
+           $("#us_cr").addClass("hidden");
          $("#savepage").removeClass("hidden");
          $("#branch").val("0");
           $("#company").val("0");
@@ -353,6 +356,8 @@ function usercreation_update(id) {
       $("#cover").hide();
       const user = response.data[0]; 
         $("#mainPage").addClass("hidden");
+         $("#us_cr").addClass("hidden");
+        
         $("#savepage").removeClass("hidden");
         $("#search_box").removeClass("hidden");
         $("#empId").val(user.empcode || "");
@@ -399,6 +404,7 @@ function usercreation_update(id) {
 function Btn_back() {
     $("#mainPage").removeClass("hidden");
   $("#savepage").addClass("hidden");
+  viewBtn();
 }
 
 function Btn_save() {
@@ -413,18 +419,41 @@ function Btn_save() {
       confirm_password.setCustomValidity('');
      
     }
-   const data = [];
+  //  const data = [];
    
-   $(".txt_all").each(function () {
-  const tag = $(this).prop("tagName").toLowerCase();
-  const value = $(this).val();
+  //  $(".txt_all").each(function () {
+  // const tag = $(this).prop("tagName").toLowerCase();
+  // const value = $(this).val();
 
-  if (tag == "select") {
+  // if (tag == "select") {
+  //   data.push(value && value !== "0" ? value : "0");
+  // } else {
+  //   data.push(value ? value : "");
+  // }
+  //  });
+
+  const data = [];
+const zeroIfEmpty = ["esi", "tds", "salary", "pf", "deduction"];
+
+$(".txt_all").each(function () {
+  const tag = this.tagName.toLowerCase();
+  const value = $(this).val();
+  const id = this.id;
+
+  // ✅ force 0 only for specific IDs
+  if (zeroIfEmpty.includes(id)) {
+    data.push(value ? value : "0");
+  } 
+  // select handling
+  else if (tag === "select") {
     data.push(value && value !== "0" ? value : "0");
-  } else {
+  } 
+  // normal inputs
+  else {
     data.push(value ? value : "");
   }
-   });
+});
+
 
    var userid = $('#lbluserid').text();
    data.push(userid);

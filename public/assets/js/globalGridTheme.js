@@ -108,12 +108,14 @@ function createThemedGrid(selector, tableData, tableColumns, fileName = "Export"
     let btn = document.createElement("button");
     btn.innerText = "Export Excel";
     btn.style.backgroundColor = "#28a745";
+    btn.id = "ex_excel";
     // Keeping button text white as it sits on the darkest part of the theme
     btn.style.color = "white"; 
     btn.style.borderRadius = "4px";
     btn.style.padding = "5px 5px 5px 5px";
     btn.className = "px-1 py-1 font-semibold shadow-md transition duration-150 hover:brightness-110 w-full sm:w-auto text-sm";
     btn.onclick = () => table.download("xlsx", `${fileName}.xlsx`, { sheetName: fileName });
+
 
     toolbar.appendChild(searchInput);
     toolbar.appendChild(btn);

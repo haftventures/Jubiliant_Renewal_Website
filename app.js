@@ -9,6 +9,7 @@ const multer = require('multer');
 const sessionMiddleware = require('./config/sessionConfig');
 
 const app = express();
+
 app.use('/Gallery', express.static(path.join(__dirname, 'Gallery')));
 // ✅ File Upload Configuration
 const upload = multer({
@@ -50,27 +51,50 @@ app.use(bodyParser.json());
 // ✅ Sessions
 app.use(sessionMiddleware);
 
+app.get("/check-session", (req, res) => {
+  if (req.session?.login) {
+    req.session.touch();
+    return res.json({ active: true });
+  }
+  res.json({ active: false });
+});
+
+
 // ✅ Global variables for EJS
 app.use((req, res, next) => {
   res.locals.login = req.session.AgntDtl || null;
   next();
 });
 
+app.get("/check-session", (req, res) => {
+  res.json({ active: req.session?.login === true });
+});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
 // ✅ Routes
 app.use('/', require('./routes/payment'));
 app.use('/', require('./routes/policy_report'));
+app.use('/', require('./routes/Make'));
+app.use('/', require('./routes/Make_qc_verified'));
+app.use('/', require('./routes/Make_qc3'));
+app.use('/', require('./routes/policyprepare'));
 app.use('/', require('./routes/auth'));
 app.use('/', require('./routes/index'));
+
+
+// ✅ Policy route (make sure this line is OUTSIDE any function)
+// const policyRoutes = require('./routes/policyprepare');
+// app.use('/', policyRoutes);
+
 
 // ✅ Custom business routes
 ['payment', 'vehicle', 'report', 'create_user', 'success', 'kyc','Policy_details', 'mass_update_sms', 'support', 'paymentdone_routes','dashboard'].forEach(route => {
   const routePath = path.join(__dirname, 'routes', `${route}.js`);
   if (fs.existsSync(routePath)) app.use('/', require(routePath));
 });
-``
-// ✅ Policy route (make sure this line is OUTSIDE any function)
-const policyRoutes = require('./routes/policyprepare');
-app.use('/', policyRoutes);
+
 
 // ✅ File Upload API
 app.post('/upload', upload.single('policyPdf'), (req, res) => {

@@ -7,7 +7,7 @@
      <script src="/assets/js/tailwind.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
- 
+       <link rel="StyleSheet" href="/css/style.css">
    <style>
     /* 🔴🔵 Siren Flash Animation */
     @keyframes sirenFlash {
@@ -22,7 +22,7 @@
   </head>
 <body class="bg-gray-100">
 
-<div class="flex justify-end p-4 fixed right-0 hover:underline underline-offset-8" id="supportbtn">
+<div class="flex justify-end p-4 fixed right-0 hover:underline underline-offset-8 cursor-pointer" id="supportbtn">
  <a class="flex items-center justify-center w-full space-x-2"><i class="fa-solid fa-headset"></i><span>Support</span></a>
   </div>
 
@@ -73,21 +73,21 @@
       <!-- Name -->
       <div>
         <label class="block text-gray-700 font-medium mb-1">Header</label>
-        <input id="pad_name" type="text" maxlength="50" class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none" placeholder="Enter Header">
+        <input id="pad_name" type="text" maxlength="50" class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-orange-500 outline-none" placeholder="Enter Header">
       </div>
 
       <!-- Description -->
       <div>
         <label class="block text-gray-700 font-medium mb-1">Description</label>
-        <textarea id="pad_description" maxlength="1000" class="w-full px-3 py-2 border rounded-lg h-28 resize-none focus:ring focus:ring-blue-300 outline-none" placeholder="Enter description"></textarea>
+        <textarea id="pad_description" maxlength="1000" class="w-full px-3 py-2 border rounded-lg h-28 resize-none focus:ring focus:ring-orange-500 outline-none" placeholder="Enter description"></textarea>
       </div>
 
     </div>
 
     <!-- Footer Buttons -->
     <div class="mt-6 flex justify-end gap-3">
-      <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Cancel</button>
-      <button id="save_btn" onclick="Succcess_support()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Submit</button>
+      <button onclick="closeModal()" class="px-4 py-2 secondary-button rounded-lg">Cancel</button>
+      <button id="save_btn" onclick="Succcess_support()" class="px-4 py-2 primary-button  text-white rounded-lg">Submit</button>
     </div>
 
   </div>
@@ -162,10 +162,11 @@ function Succcess_support() {
     type: 'POST',
     contentType: 'application/json', // ✅ send JSON properly
     data: JSON.stringify({ data: data }),
-        beforeSend: function () {
-            $("#cover").show();
-        },
+        // beforeSend: function () {
+        //     $("#cover").show();
+        // },
     success: function (response) {
+      //  $("#cover").hide();
       console.log('Server Response:', response);
 
       if (response.success == true) {
@@ -174,8 +175,7 @@ function Succcess_support() {
         $("#su_description").val("")
        document.getElementById('support_Modal').style.display = 'none';
       } else {
-       
-  
+       showmobilenumber('Error!', response.message);
       }
     },
     error: function (error) {

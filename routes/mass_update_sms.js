@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const apiCaller = require('../apicaller');
+const allowRoles = require('../routes/Middleware');
+const { convertDate, errorlog } = require('../routes/Errorlog');
 
-router.post('/show_policy_count', async (req, res) => {
+
+router.post('/show_policy_count', allowRoles(1), async (req, res) => {
   try {
         const UserId = req.session.AgntDtl.UserId
     const data = req.body.data || [];
@@ -41,11 +44,12 @@ router.post('/show_policy_count', async (req, res) => {
     }
   } catch (error) {
     console.error('Error:', error.message);
+         errorlog(error, req);
     res.status(500).json({ success: false, error: error.message });
   }
 });
 
-router.post('/mass_sms_ids', async (req, res) => {
+router.post('/mass_sms_ids', allowRoles(1), async (req, res) => {
     try {
         
          const data = req.body.data || [];
@@ -87,6 +91,7 @@ router.post('/mass_sms_ids', async (req, res) => {
 
     } catch (error) {
         console.error('Error:', error.message);
+             errorlog(error, req);
         res.status(500).json({ success: false, error: error.message });
     }
 });

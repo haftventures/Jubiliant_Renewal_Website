@@ -1,4 +1,4 @@
-<div id="mainPage" class="w-[98%] bg-white shadow-2xl p-2 mt-2 rounded-2xl transition duration-300 justify-self-center" style="box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35);">
+<div id="mainPage" class="w-[98%] bg-white shadow-2xl px-3 py-1 mt-2 rounded-2xl transition duration-300 justify-self-center" style="box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35);">
  
      <div class="flex items-center justify-center mb-1">
         <h2 class="text-gray-900">
@@ -46,7 +46,6 @@
       <div class="flex w-full sm:w-auto">
         <button
           id="viewBtn"
-          onclick="viewBtn()"
           tabindex="3"
           class="font-semibold px-6 py-1 primary-button w-full sm:w-auto mt-2 sm:mt-6"
         >
@@ -67,69 +66,76 @@
     </div>
   </div>
 
+    <div class="text-center  flex gap-6 text-[14px] justify-center">
+      <div class=" text-center bg-white p-2 rounded-lg shadow-sm border border-gray-200 h-[40px]">
+        <span class="text-gray-800">Total Count:</span>
+        <label id="lbltotal_count" class="font-bold">0</label>
+      </div>
+      </div>
+
+</div>
 
 
   <!-- Tabulator Grid -->
-  <div class="p-1 mt-3 hidden" id="us_cr">
+  <div class="p-1 mt-3 hidden w-[98%] justify-self-center" id="us_cr">
     <div class="flex justify-between items-center hidden">
       <input
         id="search_box"
         type="text"
         placeholder="Search..."
         tabindex="5"
-        class="border p-2 rounded w-64 hidden"
+        class="border px-3 py-1 rounded w-64 hidden"
       />
     </div>
 
     <div id="dynamicTable" tabindex="6" class="overflow-x-auto"></div>
   </div>
-</div>
 
-<div id="savepage" class="flex  flip-container justify-center px-4 py-12 Box_binfo2 hidden" >
-  <div class="w-full flipper max-w-5xl">
-    <div class="shadow-[0_0_15px_rgba(255,140,66,0.7)] rounded-lg p-6">
+<div id="savepage" class="flex  flip-container justify-center Box_binfo2 hidden" >
+  <div class="w-full flipper max-w-8xl" style="margin-top: -20px;">
+    <div>
      
-      <section class="container mx-auto bg-white py-10 rounded-xl px-10 mt-1 box1 flex justify-center">
-        <div class="w-full bg-gray-50 py-12 px-8 rounded-lg">
+      <section class="container mx-auto rounded-xl box1 flex justify-center ">
+        <div class="w-full bg-white py-1 p-3 rounded-lg shadow-[0_0_15px_rgba(255,140,66,0.4)]">
           <div class="flex items-center mb-6">
-            <h1 class="flex-1 text-center text-xl font-semibold text-gray-800">Create New User</h1>
+            <h1 class="flex-1 text-center text-md font-semibold text-gray-800 mt-2">Create New User</h1>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
               <label class="block mb-2 text-sm font-medium">Employee ID</label>
               <input type="text" data-placeholder="Employee ID" readonly id="empId" 
-                class="w-full p-2 bg-gray-100 border    rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 bg-gray-300 border    rounded border-gray-50 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">Employee Name<span class="text-red-600">*</span></label>
               <input type="text" maxlength="60" id="empName" data-placeholder="Employee Name" placeholder="Name"
-                class="w-full p-2 border txt_clear txt_chk txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border txt_clear txt_chk txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">Father's Name</label>
               <input type="text" maxlength="50" id="fatherName" data-placeholder="Father's Name" placeholder="Father Name"
-                class="w-full p-2 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">Father's Occupation</label>
               <input type="text" maxlength="30" id="fatherOcc" data-placeholder="Father's Occupation" placeholder="Occupation"
-                class="w-full p-2 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">Date of Birth<span class="text-red-600">*</span></label>
               <input type="text" id="dob" data-placeholder="Date of Birth" placeholder="dd/mm/yyyy"
-                class="w-full p-2 border rounded txt_clear txt_chk txt_all border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " readonly/>
+                class="w-full px-3 py-1 border rounded txt_clear txt_chk txt_all border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " readonly/>
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">Qualification</label>
               <input type="text" maxlength="15" id="qualification" placeholder="Qualification" data-placeholder="Qualification"
-                class="w-full p-2 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
            <div>
@@ -142,7 +148,7 @@
     data-placeholder="Address"
     rows="2"
     placeholder="Enter your address"
-    class="w-full p-2 border rounded border-gray-300 txt_clear txt_chk txt_all focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none  resize-none"
+    class="w-full px-3 py-1 border rounded border-gray-300 txt_clear txt_chk txt_all focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none  resize-none"
   ></textarea>
 </div>
 
@@ -156,7 +162,7 @@
      data-placeholder="Permanent Address"
     rows="2"
     placeholder="Enter your permanent address"
-    class="w-full p-2 border rounded border-gray-300 txt_clear  txt_all focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none  resize-none"
+    class="w-full px-3 py-1 border rounded border-gray-300 txt_clear  txt_all focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none  resize-none"
   ></textarea>
 </div>
 
@@ -164,19 +170,19 @@
             <div>
               <label class="block mb-2 text-sm font-medium">Mobile No<span class="text-red-600">*</span></label>
               <input type="text" data-placeholder="Mobile No" maxlength="10"  onkeypress="return isNumberKey(event)" id="mobile" placeholder="0912345678"
-                class="w-full p-2 border mob txt_clear txt_chk txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border mob txt_clear txt_chk txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">Alt Mobile No(1)</label>
               <input type="text" maxlength="10" data-placeholder="Alt Mobile No(1)"  onkeypress="return isNumberKey(event)" maxlength="10" id="altMobile1" placeholder="0812345678"
-                class="w-full p-2 border txt_clear mob  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border txt_clear mob  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div class="hidden">
               <label class="block mb-2 text-sm font-medium">Type of Person</label>
               <select id="personType" data-placeholder="Type of Person"
-                class="w-full p-2 border txt_clear   rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none ">
+                class="w-full px-3 py-1 border txt_clear   rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none ">
                 <option>--Select--</option>
                 <option>Permanent</option>
                 <option>Contract</option>
@@ -187,68 +193,68 @@
             <div>
               <label class="block mb-2 text-sm font-medium">ESI</label>
               <input type="text"  data-placeholder="ESI"  onkeypress="return fun_AllowOnlyAmountAndDot('esi', event)" maxlength="5" id="esi" placeholder="ESI No."
-                class="w-full p-2 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">TD's</label>
               <input type="text" data-placeholder="TD's" onkeypress="return fun_AllowOnlyAmountAndDot('tds', event)" maxlength="5" id="tds" placeholder="TDS No."
-                class="w-full p-2 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">Join Date<span class="text-red-600">*</span></label>
               <input type="date" id="joinDate" data-placeholder="Join Date" placeholder="dd/mm/yyyy"
-                class="w-full p-2 border txt_clear txt_chk txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border txt_clear txt_chk txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">Account No</label>
               <input type="text" maxlength="30" data-placeholder="Account No" id="accNo" placeholder="Account Number"
-                class="w-full p-2 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
 <div>
               <label class="block mb-2 text-sm font-medium">Alt Mobile No(2)</label>
               <input type="text" maxlength="10" data-placeholder="Alt Mobile No(2)" id="altMobile2" placeholder="Alt Mobile No(2)"  onkeypress="return isNumberKey(event)"
-                class="w-full p-2 border  txt_clear mob  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border  txt_clear mob  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">Blood Group</label>
               <input type="text"maxlength="5" id="bloodGroup" data-placeholder="Blood Group" placeholder="Blood Group"
-                class="w-full p-2 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">Email ID</label>
               <input type="email" maxlength="40" id="email" data-placeholder="Email ID" placeholder="testing@gmail.com"
-                class="w-full p-2 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border txt_clear  txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">User Name<span class="text-red-600">*</span></label>
               <input type="text" maxlength="20" id="username" data-placeholder="User Name" placeholder="User Name"
-                class="w-full p-2 border txt_clear txt_chk txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border txt_clear txt_chk txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
-              <label class="block mb-2 text-sm font-medium">Password</label>
+              <label class="block mb-2 text-sm font-medium">Password <span class="text-red-600">*</span></label>
               <input type="password" maxlength="15" data-placeholder="Password"  id="password" placeholder="Password"
-                class="w-full p-2 border txt_clear txt_chk txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border txt_clear txt_chk txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
                <span id="message" class="text-red-600 text-sm hidden">Passwords do not match</span>
               </div>
                  <!-- onkeyup="validatePassword()" -->
             <div>
-              <label class="block mb-2 text-sm font-medium">Confirm Password</label>
+              <label class="block mb-2 text-sm font-medium">Confirm Password <span class="text-red-600">*</span></label>
               <input type="password" maxlength="15" data-placeholder="Confirm Password"  id="confirmPassword" placeholder="Confirm Password"
-                class="w-full p-2 border txt_clear txt_chk  rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border txt_clear txt_chk  rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
               </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">Branch<span class="text-red-600">*</span></label>
               <select id="branch" data-placeholder="Branch"
-                class="w-full py-[10px] px-2 border  txt_chk txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none ">
+                class="w-full py-[10px] px-2 border  txt_chk txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none ">
                 <option value="0">Select</option>
              
               </select>
@@ -257,7 +263,7 @@
             <div>
               <label class="block mb-2 text-sm font-medium">Designation<span class="text-red-600">*</span></label>
               <select id="designation" data-placeholder="Designation"
-                class="w-full py-[10px] px-2 border  txt_chk txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none ">
+                class="w-full py-[10px] px-2 border  txt_chk txt_all rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none ">
                     <option value="0">Select</option>
                
               </select>
@@ -266,7 +272,7 @@
             <div class="hidden">
               <label class="block mb-2 text-sm font-medium">Company</label>
               <select id="company" data-placeholder="Company"
-                class="w-full py-[10px] px-2  p-2 border rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none ">
+                class="w-full py-[10px] px-2  px-3 py-1 border rounded border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none ">
                 <option value="0">--Select--</option>
                 <option>ABC Pvt Ltd</option>
                 <option>XYZ Ltd</option>
@@ -278,37 +284,37 @@
             <div>
               <label class="block mb-2 text-sm font-medium">Salary</label>
               <input type="text" data-placeholder="Salary" maxlength="6" id="salary" onkeypress="return isNumberKey(event)" placeholder="Salary"
-                class="w-full p-2 border rounded txt_clear  txt_all border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border rounded txt_clear  txt_all border-gray-300 focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">PF</label>
               <input type="text" maxlength="5" data-placeholder="PF" onkeypress="return fun_AllowOnlyAmountAndDot('pf', event)" id="pf" placeholder="PF No."
-                class="w-full p-2 border rounded border-gray-300 txt_clear  txt_all focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border rounded border-gray-300 txt_clear  txt_all focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">Other Deduction</label>
               <input type="text" maxlength="5" data-placeholder="Other Deduction" onkeypress="return fun_AllowOnlyAmountAndDot('deduction', event)" id="deduction" placeholder="Deduction"
-                class="w-full p-2 border rounded border-gray-300 txt_clear  txt_all focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border rounded border-gray-300 txt_clear  txt_all focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">Bank Name</label>
               <input type="text" maxlength="40" data-placeholder="Bank Name" id="bankName" placeholder="Bank Name"
-                class="w-full p-2 border rounded border-gray-300 txt_clear  txt_all focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border rounded border-gray-300 txt_clear  txt_all focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">IFSC Code</label>
               <input type="text" maxlength="20" data-placeholder="IFSC Code" id="ifsc" placeholder="IFSC Code"
-                class="w-full p-2 border rounded border-gray-300 txt_clear  txt_all focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none " />
+                class="w-full px-3 py-1 border rounded border-gray-300 txt_clear  txt_all focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none " />
             </div>
 
             <div>
               <label class="block mb-2 text-sm font-medium">Status<span class="text-red-600">*</span></label>
               <select id="status" data-placeholder="Status"
-                class="w-full py-[10px] px-2 border rounded border-gray-300 txt_chk  txt_all focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-white focus:outline-none ">
+                class="w-full py-[10px] px-2 border rounded border-gray-300 txt_chk  txt_all focus:ring-1 focus:ring-orange-500 focus:border-orange-500  bg-[#f9fafb] focus:outline-none ">
                 <option value="1">Active</option>
                 <option value="2">Inactive</option>
               </select>
@@ -316,7 +322,7 @@
           </div>
 
        
-  <div class="flex justify-center mt-9 gap-x-4">
+  <div class="flex justify-center mt-9 mb-3 gap-x-4">
   <button
     id="Btn_save"
     type="button"

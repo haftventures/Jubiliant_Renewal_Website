@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    $(document).on('click', '#viewBtn', () => checkSession(viewBtn));
+    $(document).on('click', '#submitBtn', () => checkSession(submitBtn));
+    $(document).on('click','#Back_btn', () => checkSession(Back_btn));
 
 function formatDate(date) {
   const d = String(date.getDate()).padStart(2, '0');
@@ -10,9 +13,7 @@ function formatDate(date) {
   $("#FromDate").val(formatDate(firstDayOfMonth));
   $("#ToDate").val(formatDate(today));
 
-    $(document).on('click', '#viewBtn', viewBtn);
-    $(document).on('click', '#submitBtn', submitBtn);
-    $(document).on('click','#Back_btn', Back_btn)
+
     flatpickr("#Payment_Date", {
     dateFormat: "d/m/Y",
     allowInput: true,
@@ -107,7 +108,7 @@ flatpickr("#ToDate", {
       let success = response.success;
 
       if (success == true) {
-       
+       $("#lbltotal_count").text(response.Count);
 if (window.currentTabulator) {
     window.currentTabulator.destroy();
 }
@@ -116,28 +117,30 @@ if (window.currentTabulator) {
 createThemedGrid(
     "#dynamicTable",
     response.data,
+    
     [
-        { title: "S.No.", formatter: "rownum", width: 60, hozAlign: "center" },
-        { title: "Date", field: "datee", width: 100 },
-         { title: "Transactionid", field: "transactionid", width: 160 },      
-        { title: "Vehicle No", field: "vehicleno", width: 120 },
-         { title: "Make", field: "make", width: 100 },
-        { title: "Mobile", field: "mobile", width: 120 },
-        { title: "Model", field: "model", width: 100 },
-        { title: "engineno", field: "engineno", width: 160 },
-        { title: "Chasisno", field: "chasisno" , width: 120, minWidth: 120},
-          { title: "Header", field: "name", width: 100 },  
-         { title: "Description", field: "description", width: 220 },
+        { title: "S.No.", formatter: "rownum", widthGrow: 1 , hozAlign: "center" },
+         { title: "Customer Name ", field: "customername", widthGrow: 1 }, 
+        { title: "Date", field: "datee",  widthGrow: 1 },          
+        { title: "Vehicle No", field: "vehicleno",  widthGrow: 1 },
+         { title: "Make", field: "make",  widthGrow: 1 },
+        { title: "Mobile", field: "mobile",  widthGrow: 1 },
+        { title: "Model", field: "model",  widthGrow: 1 },
+        { title: "engineno", field: "engineno", width: 160 , visible: false },
+        { title: "Chasisno", field: "chasisno" , width: 120, minWidth: 120, visible: false },
+          { title: "Header", field: "name", width: 100, visible: false  },  
+         { title: "Description", field: "description", width: 160, visible: false  },
          {
               title: "Action",
+              width: 80,
               formatter: function (cell) {
                 const userid = cell.getRow().getData().support_id;
                  $("#lblsupport_id").text(userid);
                 let Transaction_id = cell.getRow().getData().transactionid;
                 const mobile = cell.getRow().getData().mobile;
-                 $("#lblmobileno").text(userid);
+                 $("#lblmobileno").text(mobile);
                 
-                return `<u style="color:blue; cursor:pointer;" onclick="Support_report('${Transaction_id}')">Replay</u>`;
+                return `<u style="color:blue; cursor:pointer;" onclick="Support_report('${Transaction_id}')">View</u>`;
                
               },
             },
@@ -171,7 +174,9 @@ function Support_report(id) {
     success: function (response) {
       $("#mainPage").addClass("hidden");
      $("#Second_Page").removeClass("hidden");
+           $("#supp_id").addClass("hidden");
       $("#cover").hide();     
+              $("#replyText").val("");
       let success = response.success;
 
       if (success == true) {
@@ -223,16 +228,18 @@ function submitBtn() {
     traditional: true,
     data: { data: data },
     beforeSend: function () {
-      $("#cover").show();
+     $("#cover").show();
     },
     success: function (response) {
-      $("#mainPage").addClass("hidden");
-     $("#Second_Page").removeClass("hidden");
       $("#cover").hide();     
+      $("#mainPage").removeClass("hidden");
+     $("#Second_Page").addClass("hidden");
+     $("#supp_id").removeClass("hidden");
+      
       let success = response.success;
        if (success == true ) {
         showmobilenumber("Success!", response.message);
-        $("#lblinsertedId").text();
+        // $("#lblinsertedId").text();
         $("#replyText").val("");
        } else if (success == false) {
         showmobilenumber("Error!", response.message);
@@ -252,4 +259,5 @@ function Back_btn() {
    $("#Second_Page").addClass("hidden");
    $("#mainPage").removeClass("hidden");
    $("#replyText").val("");
+     $("#supp_id").removeClass("hidden");
 }

@@ -1,0 +1,18 @@
+-----------Exception Details on 12/27/2025, 4:05:40 PM-----------------
+
+Error Line No : at paymentHandler (F:\Jubiliant_Renewal website\Jubiliant_Renewal_website\routes\payment.js:88:35)
+
+Error Message : Cannot read properties of null (reading 'success')
+
+Exception Type: TypeError
+
+Error Stack   : TypeError: Cannot read properties of null (reading 'success')
+    at paymentHandler (F:\Jubiliant_Renewal website\Jubiliant_Renewal_website\routes\payment.js:88:35)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+
+Error Page Url: /payment?txnid=BE8191E17C71474
+
+User Host IP  : ::1
+
+--------------------------------*End*------------------------------------------
+

@@ -2,9 +2,11 @@
 const express = require('express');
 const router = express.Router();
 const apiCaller = require('../apicaller');
+const allowRoles = require('../routes/Middleware');
+const { convertDate, errorlog } = require('../routes/Errorlog');
 
 // POST /api/leads/save
-router.post('/reportgrid', async (req, res) => {
+router.post('/reportgrid', allowRoles(1), async (req, res) => {
   try {
     const data = req.body.data || [];
     // console.log("Parsed data array:", data);
@@ -29,6 +31,7 @@ router.post('/reportgrid', async (req, res) => {
     });
   } catch (error) {
     console.error('Error:', error.message);
+         errorlog(error, req);
     res.status(500).json({ success: false, error: error.message });
   }
 });

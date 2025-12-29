@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const apiCaller = require('../apicaller');
+const allowRoles = require('../routes/Middleware');
+const { convertDate, errorlog } = require('../routes/Errorlog');
 
-router.post('/policydetailgrid_hari', async (req, res) => {
+
+router.post('/policydetailgrid_hari', allowRoles(1), async (req, res) => {
   try {
     const data = req.body.data || [];
     // console.log("Parsed data array:", data);
@@ -22,17 +25,18 @@ router.post('/policydetailgrid_hari', async (req, res) => {
 
     res.json({
       success: result.success,
-      message: "Data fetched successfully",
+      message: result.message,
       data: result.data,
       Count:result.count
     });
   } catch (error) {
     console.error('Error:', error.message);
+    errorlog(error, req);
     res.status(500).json({ success: false, error: error.message });
   }
 });
 
-router.post('/selected_ids', async (req, res) => {
+router.post('/selected_ids', allowRoles(1), async (req, res) => {
     try {
             const UserId = req.session.AgntDtl.UserId
         const data = req.body.data || []; // Example: [1,2,3,4,5]
@@ -71,12 +75,52 @@ router.post('/selected_ids', async (req, res) => {
 
     } catch (error) {
         console.error('Error:', error.message);
+        errorlog(error, req);
         res.status(500).json({ success: false, error: error.message });
     }
 });
 // router.get("/mass-update", (req, res) => {
 //     res.render("mass_update_sms");
 // });
+
+router.post('/policy_details_save', allowRoles(1), async (req, res) => {
+  try {
+    const data = req.body.data || [];
+    // console.log("Parsed data array:", data);
+    // If you need to map them properly
+    const [customername,address, mobile, vehicleno, make, model, regdate,  engineno, chasisno, policyenddate, oneyear, twoyear, threeyear] = data;
+
+    // Example payload to API
+    const payload = {
+      customername,
+      address,
+      mobile,
+      vehicleno,
+      make,
+      model,
+      regdate,
+      policyenddate,
+      engineno,
+      chasisno,
+      oneyear,
+      twoyear,
+      threeyear
+    };
+
+    const result = await apiCaller.apicallerLivePort('renewal/policy_details_save', payload);
+
+    // console.log("API Response:", result);
+
+    res.json({
+      success: result.success,
+      message: result.message,
+    });
+  } catch (error) {
+    console.error('Error:', error.message);
+    errorlog(error, req);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
 
 
 module.exports = router;

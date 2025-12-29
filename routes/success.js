@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const apiCaller = require('../apicaller');
 const axios = require('axios');
-
+const { convertDate, errorlog } = require('../routes/Errorlog');
 
 router.post('/successtxnidupdate', async (req, res) => {
   try {
@@ -19,8 +19,9 @@ router.post('/successtxnidupdate', async (req, res) => {
     );
 
     res.json({ success: result.success });
-  } catch (err) {
+  } catch (error) {
     console.error('successtxnidupdate error:', err);
+         errorlog(error, req);
     res.status(500).json({
       success: false,
       message: `Internal server error: ${err.message}`,
@@ -42,8 +43,9 @@ router.post('/Succcess_support', async (req, res) => {
     );
 
     res.json({ success: result.success, message: result.message });
-  } catch (err) {
+  } catch (error) {
     console.error('successtxnidupdate error:', err);
+         errorlog(error, req);
     res.status(500).json({
       success: false,
       message: `Internal server error: ${err.message}`,

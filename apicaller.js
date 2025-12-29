@@ -2,8 +2,10 @@
 const axios = require('axios');
 
 // const BASE_URL = 'http://202.83.25.185:4065/'; // your API base
-// const BASE_URL = 'http://49.207.186.126:8001/'; 
+// const BASE_URL = 'http://49.207.186.126:4078/'; 
 const BASE_URL = 'https://renewalapi.jipolicy.com/';
+
+// const BASE_URL = 'http://192.168.2.55:5000/'; 
 
 module.exports = {
   async apicallerLivePort(apiName, dictionary) {

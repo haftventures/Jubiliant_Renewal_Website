@@ -5,8 +5,8 @@ $(document).ready(function () {
     flatpickr("#FromDate", { dateFormat: "d/m/Y", defaultDate: firstDay, disableMobile: true,});
     flatpickr("#ToDate", { dateFormat: "d/m/Y", defaultDate: today, disableMobile: true, });
 
-    $(document).on("click", "#viewBtn", viewBtn);
-    $(document).on("click", "#sendBtn", sendBtn);
+    $(document).on("click", "#viewBtn", () => checkSession(viewBtn));
+    $(document).on("click", "#sendBtn", () => checkSession(sendBtn));
     $("#totalpolicy").hide();
 });
 function viewBtn() {

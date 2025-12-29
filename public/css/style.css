@@ -186,7 +186,7 @@ header {
   gap: 10px;
   position: relative;
   cursor: pointer;
-  padding: 6px 12px;
+  padding: 3px 7px;
   border-radius: 12px;
   transition: all 0.6s ease;
 }
@@ -216,7 +216,7 @@ header {
   background: white;
   border-radius: 3px;
   box-shadow: 0px 1px 2px var(--shadow-light);
-  min-width: 178px;
+  min-width: 130px;
   z-index: 100;
   opacity: 0;
   visibility: hidden;
@@ -245,7 +245,7 @@ header {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 20px;
+  padding: 5px 8px;
   color: #000000;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -856,10 +856,10 @@ footer {
   user-select: none;
 }
 .office-use {
-  background: #fff7f0; /* a very light orange for background */
+  background: #f2f2f2; /* a very light orange for background */
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid #ea690b; /* main orange color */
+  border: 1px solid black; /* main orange color */
   margin-top: 20px;
 }
 
@@ -885,10 +885,10 @@ footer {
   padding: 8px 12px;
   font-size: 14px;
   line-height: 1.5;
-  color: #212529;
-  background-color: #fff7f0; /* light orange background */
+  color: #000000;
+  background-color: ; /* light orange background */
   background-clip: padding-box;
-  border: 1px solid #ea690b; /* main orange border */
+  border: 1px solid black; /* main orange border */
   border-radius: 6px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   box-sizing: border-box;
@@ -935,7 +935,7 @@ footer {
 }
 
 .primary-button:hover {
-  background-color: var(--hover); /* hover:bg-blue-700 */
+  background-color: #ff8516; /* hover:bg-blue-700 */
 }
 
 
@@ -945,12 +945,12 @@ footer {
   /* padding-top: 0.5rem;     
   padding-bottom: 0.5rem;   */
   background-color: var(--secondary-button);
-  color: white;           
+  color: black;           
   border-radius: 0.5rem;   
   box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.24); 
   transition: background-color 0.2s ease-in-out;
 }
 
 .secondary-button{
- background-color: #bdbfc2;
+ background-color: #e2e4e8;
 }

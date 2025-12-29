@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Link Expired</title>
+    <script src="/assets/js/tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+       <link rel="StyleSheet" href="/css/style.css">
+
+  <style>
+    .fade-in {
+      animation: fadeIn 0.9s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
+
+  <div class="fade-in bg-white shadow-xl rounded-2xl p-8 max-w-md w-full text-center border-l-2 border-r-2 border-[#ff0000]">
+    
+    <!-- Icon -->
+    <div class="flex justify-center mb-4">
+      <div class="w-16 h-16 flex items-center justify-center rounded-full bg-red-100 animate-pulse">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4c-.77-1.33-2.69-1.33-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Text -->
+    <h1 class="text-2xl font-bold text-gray-800">Link Expired</h1>
+    <!-- <p class="text-gray-600 mt-2">
+      This link is no longer valid or has already been used.
+    </p> -->
+
+    <!-- Countdown -->
+    <!-- <p class="text-sm text-gray-500 mt-4">
+      Redirecting in <span id="countdown" class="font-semibold text-red-600">5</span> seconds
+    </p> -->
+  </div>
+
+  <!-- JS -->
+  <!-- <script>
+    let time = 5;
+    const el = document.getElementById("countdown");
+
+    const timer = setInterval(() => {
+      time--;
+      el.textContent = time;
+
+      if (time <= 0) {
+        clearInterval(timer);
+        window.location.href = "/";
+      }
+    }, 1000);
+  </script> -->
+
+</body>
+</html>

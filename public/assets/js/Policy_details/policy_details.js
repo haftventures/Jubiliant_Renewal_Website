@@ -5,8 +5,108 @@ $(document).ready(function () {
     flatpickr("#FromDate", { dateFormat: "d/m/Y", defaultDate: firstDay, disableMobile: true, });
     flatpickr("#ToDate", { dateFormat: "d/m/Y", defaultDate: today, disableMobile: true, });
 
-    $(document).on("click", "#viewBtn", viewBtn);
-    $(document).on("click", "#sendBtn", sendBtn);
+    $(document).on("click", "#viewBtn", () => checkSession(viewBtn));
+    $(document).on("click", "#sendBtn", () => checkSession(sendBtn));
+
+        $(document).on("click", "#AddnewBtn", () => checkSession(AddnewBtn));
+        $(document).on("click", "#Btn_back", () => checkSession(Btn_back));
+        $(document).on("click", "#Btn_save", () => checkSession(Btn_save));
+
+const curY = today.getFullYear();
+
+flatpickr("#regDate", {
+  dateFormat: "d/m/Y",
+  maxDate: today,          // ⛔ no future dates
+  allowInput: false,
+  disableMobile: true,
+
+  onReady: function (_, __, fp) {
+
+    // Hide default year input
+    const numInputs = fp.calendarContainer.querySelectorAll(".numInputWrapper");
+    numInputs.forEach(el => el.style.display = "none");
+
+    // Custom year select
+    const sel = document.createElement("select");
+    sel.className = "fp-year";
+
+    // ✅ Year list: 2025 → 2010 (example)
+    for (let y = curY; y >= curY - 15; y--) {
+      const opt = document.createElement("option");
+      opt.value = y;
+      opt.textContent = y;
+      sel.appendChild(opt);
+    }
+
+    sel.value = fp.currentYear;
+
+    sel.onchange = () => {
+      fp.jumpToDate(new Date(sel.value, fp.currentMonth, 1));
+    };
+
+    const monthContainer = fp.calendarContainer.querySelector(".flatpickr-current-month");
+    if (monthContainer) monthContainer.appendChild(sel);
+
+    fp.calendarContainer.addEventListener("click", () => {
+      sel.value = fp.currentYear;
+    });
+  }
+});
+
+// past 6 months
+const past6Months = new Date();
+past6Months.setMonth(today.getMonth() - 6);
+
+// future 5 years
+const future5Years = new Date();
+future5Years.setFullYear(today.getFullYear() + 5);
+
+flatpickr("#policyEndDate", {
+  dateFormat: "d/m/Y",
+
+  // ✅ allow past 6 months → future 5 years
+  minDate: past6Months,
+  maxDate: future5Years,
+
+  allowInput: false,
+  disableMobile: true,
+
+  onReady: function (_, __, fp) {
+
+    // ❌ hide default year input
+    const yWrap = fp.calendarContainer.querySelector(".numInputWrapper");
+    if (yWrap) yWrap.style.display = "none";
+
+    // ✅ custom year dropdown
+    const sel = document.createElement("select");
+    sel.className = "fp-year";
+
+    const curY = today.getFullYear();
+
+    // ✅ year range: current-1 → current+5
+    for (let y = curY - 0; y <= curY + 5; y++) {
+      const opt = document.createElement("option");
+      opt.value = y;
+      opt.textContent = y;
+      sel.appendChild(opt);
+    }
+
+    sel.value = fp.currentYear;
+
+    sel.onchange = () => {
+      fp.jumpToDate(new Date(sel.value, fp.currentMonth, 1));
+    };
+
+    const monthWrap = fp.calendarContainer.querySelector(".flatpickr-current-month");
+    if (monthWrap) monthWrap.appendChild(sel);
+
+    // keep dropdown synced
+    fp.calendarContainer.addEventListener("click", () => {
+      sel.value = fp.currentYear;
+    });
+  }
+});
+
 });
 
 function viewBtn() {
@@ -31,7 +131,7 @@ function viewBtn() {
             $("#lbltotal_count").text(response.Count)
             $("#cover").hide();
             $("#div_send").hide();
-
+            $("#table_Container").removeClass("hidden");
             // -------------------------------
             // If no rows returned
             // -------------------------------
@@ -102,16 +202,16 @@ function viewBtn() {
                             cell.getRow().getPosition(true)
                     },
 
-                    { title: "Date", field: "upload_date", width: 100 },
-                    { title: "Customer Name", field: "customername", width: 150 },
-                    { title: "Mobile", field: "mobile", width: 100 },
-                    { title: "Vehicle No", field: "vehicleno", width: 100 },
-                    { title: "Make", field: "make", width: 150 },
-                    { title: "Model", field: "model", width: 150 },
-                    { title: "Transaction ID", field: "transactionid", width: 150 },
-                    { title: "Reg Date", field: "regdate", width: 100 },
-                    { title: "Engine No", field: "engineno", width: 200 },
-                    { title: "Chassis No", field: "chasisno", width: 200 },
+                    { title: "Date", field: "upload_date", widthGrow: 1 },
+                    { title: "Customer Name", field: "customername", widthGrow: 1 },
+                    { title: "Mobile", field: "mobile", widthGrow: 1 },
+                    { title: "Vehicle No", field: "vehicleno", widthGrow: 1 },
+                    { title: "Make", field: "make", widthGrow: 1 },
+                    { title: "Model", field: "model", widthGrow: 1 },
+                    { title: "Transaction ID", field: "transactionid", widthGrow: 1, visible: false },
+                    { title: "Reg Date", field: "regdate", widthGrow: 1 },
+                    { title: "Engine No", field: "engineno", widthGrow: 1 },
+                    { title: "Chassis No", field: "chasisno", widthGrow: 1 },
 
                 ],
                 "Policy_Details"
@@ -235,4 +335,66 @@ function sendBtn() {
             $("#cover").hide();
         }
     });
+}
+
+
+function AddnewBtn() {
+    $("#mainPage").addClass("hidden");
+    $("#savepage").removeClass("hidden");   
+      $("#table_Container").addClass("hidden"); 
+        clearall(".pd_txt_clear");    
+}
+
+function Btn_back() {
+    $("#savepage").addClass("hidden");
+    $("#mainPage").removeClass("hidden");     
+      clearall(".pd_txt_clear");
+    // viewBtn()  
+      $("#table_Container").removeClass("hidden"); 
+}
+
+function Btn_save() {
+  if (chkdata(".pd_txt_chk") && chk_mobileno(".mobileNo") && chk_vehicleno(".vehicleNo") && chk_engine("engineNo") && chk_chasis("chassisNo")) {
+
+  // ✅ Collect input values
+  const data = [];
+  $(".pd_txt_all").each(function () {
+    data.push($(this).val());
+  });
+
+  console.log(data);
+  $.ajax({
+        type: "POST",
+        url: "/policy_details_save",
+        data: { data: data },
+        traditional: true,
+
+        beforeSend: function () {
+            $("#cover").show();
+        },
+
+        success: function (response) {
+            $("#cover").hide();
+
+            if (response.success == true) {
+                showmobilenumber("Success!", response.message);
+                   $("#savepage").addClass("hidden");
+                  $("#mainPage").removeClass("hidden"); 
+                //   viewBtn() 
+                  $("#table_Container").removeClass("hidden"); 
+                  clearall(".pd_txt_clear");
+            } else {
+                showmobilenumber("Error!", response.message || "Failed to save policy details");
+            }
+
+        },
+
+        error: function (xhr, status, error) {
+            $("#cover").hide();
+            $("#div_send").hide();
+            showmobilenumber("Error!" , error);
+        }
+    });
+
+}
 }

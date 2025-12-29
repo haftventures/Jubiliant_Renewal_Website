@@ -10,8 +10,8 @@ function formatDate(date) {
   $("#FromDate").val(formatDate(firstDayOfMonth));
   $("#ToDate").val(formatDate(today));
 
-    $(document).on('click', '#viewBtn', viewBtn);
-    $(document).on('click', '#Btn_save', Btn_save);
+    $(document).on('click', '#viewBtn', () => checkSession(viewBtn));
+    $(document).on('click', '#Btn_save', () => checkSession( Btn_save));
     flatpickr("#Payment_Date", {
     dateFormat: "d/m/Y",
     allowInput: true,
@@ -115,22 +115,22 @@ createThemedGrid(
     "#dynamicTable",
     response.data,
     [
-        { title: "S.No.", formatter: "rownum", width: 20, hozAlign: "center" },
-        { title: "Date", field: "date" },
-        { title: "Customer Name", field: "customername" },
-        { title: "Mobile", field: "mobile" },
-        { title: "Vehicle No", field: "vehicleno" },
-        { title: "Make", field: "make" },
-        { title: "Model", field: "model" },
-        { title: "Transactionid", field: "transactionid" },
-        { title: "Email", field: "email" },
-        { title: "Policyenddate", field: "policyenddate" },
-        { title: "Reg_date", field: "reg_date", hozAlign: "right" },
-        { title: "Engineno", field: "engineno" },
-        { title: "Chasisno", field: "chasisno" },
-        { title: "Payment_mode", field: "payment_mode" },
-        { title: "Payment_amount", field: "payment_amount" ,width: 120 },
-        { title: "MatchStatus", field: "MatchStatus", width: 100},
+        { title: "S.No.", formatter: "rownum",  widthGrow: 1, hozAlign: "center" },
+        { title: "Date", field: "date", widthGrow: 1 },
+        { title: "Customer Name", field: "customername", widthGrow: 1 },
+        { title: "Mobile", field: "mobile", widthGrow: 1 },
+        { title: "Vehicle No", field: "vehicleno", widthGrow: 1 },
+        { title: "Make", field: "make", widthGrow: 1 },
+        { title: "Model", field: "model", widthGrow: 1 },
+        { title: "Transactionid", field: "transactionid", visible: "false" },
+        { title: "Email", field: "email", widthGrow: 1 },
+        { title: "Policyenddate", field: "policyenddate", widthGrow: 1 },
+        { title: "Reg_date", field: "reg_date", widthGrow: 1, hozAlign: "right" },
+        { title: "Engineno", field: "engineno", widthGrow: 1 },
+        { title: "Chasisno", field: "chasisno", widthGrow: 1 },
+        { title: "Payment_mode", field: "payment_mode", widthGrow: 1 },
+        { title: "Payment_amount", field: "payment_amount" , widthGrow: 1 },
+        { title: "MatchStatus", field: "MatchStatus",  widthGrow: 1},
     ],
     "Report"
     // true      ------this is every column is searchable or not

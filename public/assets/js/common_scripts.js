@@ -285,14 +285,14 @@ function chk_vehicleno(cls)
             var t = u.replace(/[^0-9]/g, "").length;
             var o = u.length - t;
             if (t < 2 || o < 2) {
-                alert('Please type valid ' + y[i]);
+                showmobilenumber('Error!','Please type valid ' + y[i], [s[i]]);
                 $('#' + s[i]).focus();
                 c = 0;
                 break;
             }
         }
         else {
-            alert('Please type valid ' + y[i]);
+            showmobilenumber('Error!','Please type valid ' + y[i] , [s[i]]);
             $('#' + s[i]).focus();
             c = 0;
         }
@@ -418,7 +418,7 @@ function chk_chasis(txtchasis) {
     var chasis = $('#' + txtchasis).val();
 
     if (chasis.length < 6) {
-        showmobilenumber('Please Enter Minimum 6 digits', txtchasis);
+        showmobilenumber('Error!','Please Enter Minimum 6 digits', txtchasis);
         $('#' + txtchasis).focus();
         return false;
     }
@@ -431,7 +431,7 @@ function chk_engine(txtengine) {
     var engine = $('#' + txtengine).val();
 
     if (engine.length < 6) {
-        showmobilenumber('Please Enter Minimum 6 digits', txtengine);
+        showmobilenumber('Error!','Please Enter Minimum 6 digits', txtengine);
         $('#' + txtengine).focus();
         return false;
     }
@@ -1048,4 +1048,23 @@ function monthly_income(txtmon_income1_prospects_g) {
     } else {
         return true;  // Allow further action if the value is 15000 or above
     }
+}
+
+
+function showConfirmModal_qc(title, message, onYes) {
+  const modal = document.getElementById("hs-modal_qc");
+
+  document.getElementById("modalHeader_qc").innerText = title;
+  document.getElementById("modalMessage_qc").innerText = message;
+
+  modal.classList.remove("hidden");
+
+  document.getElementById("modalYes_qc").onclick = () => {
+    modal.classList.add("hidden");
+    onYes();
+  };
+
+  document.getElementById("modalNo_qc").onclick = () => {
+    modal.classList.add("hidden");
+  };
 }

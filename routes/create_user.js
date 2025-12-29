@@ -2,9 +2,12 @@
 const express = require('express');
 const router = express.Router();
 const apiCaller = require('../apicaller');
+const { json } = require('body-parser');
+const allowRoles = require('../routes/Middleware');
+const { convertDate, errorlog } = require('../routes/Errorlog');
 
 // POST /api/leads/save
-router.post('/createusergrid', async (req, res) => {
+router.post('/createusergrid', allowRoles(1), async (req, res) => {
   try {
     const UserId = req.session.AgntDtl.UserId
     // console.log("Raw body:", req.body);
@@ -56,17 +59,19 @@ router.post('/createusergrid', async (req, res) => {
       success: result.success,
       data: result?.UserList || [],
       BranchList: BranchList,
+      Count: result.count,
       RoleList: RoleList
     });
 
   } catch (error) {
     console.error('❌ Error in /createusergrid:', error);
+         errorlog(error, req);
     res.status(500).json({ success: false, error: error.message });
   }
 });
 
 
-router.post('/addnewuser', async (req, res) => {
+router.post('/addnewuser', allowRoles(1), async (req, res) => {
   try {
     const UserId = req.session.AgntDtl.UserId
     // console.log("Raw body:", req.body);
@@ -123,6 +128,7 @@ router.post('/addnewuser', async (req, res) => {
 
   } catch (error) {
     console.error('❌ Error in /createusergrid:', error);
+         errorlog(error, req);
     res.status(500).json({ success: false, error: error.message });
   }
 });
@@ -132,19 +138,15 @@ router.post('/addnewuser', async (req, res) => {
 
 
 
-router.post('/Dataupdate', async (req, res) => {
+router.post('/Dataupdate', allowRoles(1), async (req, res) => {
   try {
     const data = req.body.data || [];
     // console.log("Parsed data array:", data);
     // If you need to map them properly
-    const [userid] = data;
-
-    // Example payload to API
-    const id = {
-       userid: userid
+ const userid = {
+      userid: data
     };
-
-    const result = await apiCaller.apicallerLivePort('Policy_renewal/single_userdetails', id);
+    const result = await apiCaller.apicallerLivePort('Policy_renewal/single_userdetails', userid);
 
     // console.log("API Response:", result);
 
@@ -155,12 +157,13 @@ router.post('/Dataupdate', async (req, res) => {
     });
   } catch (error) {
     console.error('Error:', error.message);
+         errorlog(error, req);
     res.status(500).json({ success: false, error: error.message });
   }
 });
   
 
-router.post('/usercreation_Datainsert', async (req, res) => {
+router.post('/usercreation_Datainsert', allowRoles(1), async (req, res) => {
   try {
     const data = req.body.data || [];
     // console.log("Parsed data array:", data);
@@ -180,7 +183,7 @@ router.post('/usercreation_Datainsert', async (req, res) => {
       branchid, roleid, salary, pf, deduction, bankname, ifsccode, statuss,userid,insertstatus,createdid: "1"
     };
 
-    // console.log("User Details JSON:", JSON.stringify(userdetails));
+    console.log("User Details JSON:", JSON.stringify(userdetails));
 
     const result = await apiCaller.apicallerLivePort('Policy_renewal/user_insert', userdetails);
 
@@ -193,6 +196,7 @@ router.post('/usercreation_Datainsert', async (req, res) => {
     });
   } catch (error) {
     console.error('Error:', error.message);
+         errorlog(error, req);
     res.status(500).json({ success: false, error: error.message });
   }
 });

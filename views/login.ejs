@@ -190,16 +190,28 @@
         <p id="error" class="text-red-600 text-sm text-center"></p>
 
         <!-- Button -->
-       <button 
+    <button 
   type="submit" 
   id="button_login"
   class="w-full py-3 text-white text-lg font-semibold rounded-lg 
          bg-gradient-to-r from-[#ea690b] to-[#CC5500] 
          hover:from-[#CC5500] hover:to-[#ea690b]
          hover:-translate-y-0.5 shadow-md hover:shadow-lg 
-         transition-all duration-300">
-  Login
+         transition-all duration-300 flex items-center justify-center gap-2">
+
+  <svg id="login_loader" class="animate-spin h-6 w-6 text-white hidden" 
+       xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" 
+              stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" 
+            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+  </svg>
+
+  <!-- LOGIN TEXT -->
+  <span id="login_text">Login</span>
+
 </button>
+
 
 
       </form>
@@ -246,7 +258,7 @@
         $("#error").text("Please enter username and password.");
         return;
       }
-
+        startLoader();
       try {
         const response = await fetch("/login", {
           method: "POST",
@@ -264,7 +276,10 @@
       } catch (err) {
         console.error(err);
         $("#error").text("Network error. Try again.");
-      }
+      } finally {
+    // 🔥 Stop loader AFTER response (success or error)
+    stopLoader();
+  }
     });
 
     const passwordInput = document.getElementById("txt_Password");
@@ -293,6 +308,27 @@ toggle.addEventListener("click", () => {
     if (mobileBtn) mobileBtn.addEventListener('click', openMobileMenu);
     if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMobileMenu);
     if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
+
+
+
+
+
+    function startLoader() {
+  $("#login_text").addClass("hidden");
+  $("#login_loader").removeClass("hidden");
+  $("#button_login")
+    .prop("disabled", true)
+    .addClass("opacity-70 cursor-not-allowed");
+}
+
+function stopLoader() {
+  $("#login_text").removeClass("hidden");
+  $("#login_loader").addClass("hidden");
+  $("#button_login")
+    .prop("disabled", false)
+    .removeClass("opacity-70 cursor-not-allowed");
+}
+
     
 </script>
 </body>
